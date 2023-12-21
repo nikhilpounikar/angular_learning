@@ -17,7 +17,6 @@ export class ChildComponent {
 
   @Output() selectChild = new EventEmitter<string>();
 
-
   sendDataToParent(){
     this.selectChild.emit(this.childName);
   }
