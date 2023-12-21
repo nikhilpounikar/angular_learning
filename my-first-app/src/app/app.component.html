@@ -28,5 +28,10 @@
 
 <!-- Passing Data From Parent to Child -->
 
-<h1>I'm {{data.relativeStatus}}</h1>
-<app-child [info]="data"></app-child>
+<!-- <h1>I'm {{data.relativeStatus}}</h1>
+<app-child [info]="data"></app-child> -->
+
+
+<!-- /* Child to Parent */ -->
+<h1>Selected Child {{name}}</h1>
+<app-child *ngFor="let childName of childs" [childName]="childName" (selectChild)="setName($event)"></app-child>

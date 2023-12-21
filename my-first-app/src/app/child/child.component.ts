@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -7,7 +7,20 @@ import { Component, Input } from '@angular/core';
 })
 export class ChildComponent {
 
-  @Input() info:any;
+  /* Parent to Child */
+  // @Input() info:any;
 
-  relativeStatus:string = "Son";
+  // relativeStatus:string = "Son";
+
+  /* Child to Parent */
+  @Input() childName:any;
+
+  @Output() selectChild = new EventEmitter<string>();
+
+
+  sendDataToParent(){
+    this.selectChild.emit(this.childName);
+  }
+
+
 }

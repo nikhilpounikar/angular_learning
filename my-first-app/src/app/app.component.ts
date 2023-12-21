@@ -22,11 +22,21 @@ export class AppComponent {
   }
 
   // --------------------------
+  /* Parent To Child */
+  // data = {
+  //   relativeStatus:"Father",
+  //   age:60,
+  //   wealth:"2 Million $"
+  // }
 
-  data = {
-    relativeStatus:"Father",
-    age:60,
-    wealth:"2 Million $"
-  }
 
+
+   /* Child to Parent */
+   name:string="";
+
+   childs:string[] = ["Rahul","Shubham","Monty","Mika"]
+
+   setName(name:string){
+    this.name = name;
+   }
 }
