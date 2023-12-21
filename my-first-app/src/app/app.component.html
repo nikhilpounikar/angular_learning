@@ -4,10 +4,10 @@
   <h1>Main Component</h1>
   <app-child></app-child>
 </div> -->
-
+<!-- =========================================================== -->
 <!-- Angular Interactions -->
 
-<h1>{{courseName}} tutorial</h1>
+<!-- <h1>{{courseName}} tutorial</h1>
 
 <div>
   <img [src]="imageUrl" alt="Image">
@@ -22,4 +22,11 @@
   <label>Enter Your Name:</label>
   <input type="text" name="" id="" [(ngModel)]="studentName" >
   <p>Welcome to {{courseName}} tutorial {{studentName}}</p>
-</div>
+</div> -->
+
+<!-- =========================================================== -->
+
+<!-- Passing Data From Parent to Child -->
+
+<h1>I'm {{data.relativeStatus}}</h1>
+<app-child [info]="data"></app-child>

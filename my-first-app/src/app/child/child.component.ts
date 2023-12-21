@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class ChildComponent {
 
+  @Input() info:any;
+
+  relativeStatus:string = "Son";
 }

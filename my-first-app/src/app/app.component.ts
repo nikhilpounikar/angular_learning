@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +19,14 @@ export class AppComponent {
   increaseCounter():void {
     
     this.count++;
+  }
+
+  // --------------------------
+
+  data = {
+    relativeStatus:"Father",
+    age:60,
+    wealth:"2 Million $"
   }
 
 }
