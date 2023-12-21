@@ -13,13 +13,15 @@ export class ChildComponent {
   // relativeStatus:string = "Son";
 
   /* Child to Parent */
-  @Input() childName:any;
+  // @Input() childName:any;
 
-  @Output() selectChild = new EventEmitter<string>();
+  // @Output() selectChild = new EventEmitter<string>();
 
-  sendDataToParent(){
-    this.selectChild.emit(this.childName);
-  }
+  // sendDataToParent(){
+  //   this.selectChild.emit(this.childName);
+  // }
 
+
+  /* Dynamic Components */
 
 }
