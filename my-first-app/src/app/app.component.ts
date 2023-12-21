@@ -8,5 +8,17 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'my-first-app';
 
-  courseName: string = "Angular"
+  courseName: string = "Angular";
+
+  imageUrl: string = "https://picsum.photos/200";
+
+  count:number = 0;
+
+  studentName:string="";
+
+  increaseCounter():void {
+    
+    this.count++;
+  }
+
 }
