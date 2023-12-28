@@ -3,20 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChildComponent } from './archived/child/child.component';
 import { FormsModule } from '@angular/forms';
-import { Child2Component } from './archived/child-2/child-2.component';
-import { Child3Component } from './archived/child-3/child-3.component';
 import { AddStudentComponent } from './components/add-student/add-student.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
+import { IndexedDbService } from './services/indexed-db.service';
+
+const dbConfig: DBConfig = {
+  name: 'studentDB',
+  version: 1,
+  objectStoresMeta: []
+};
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChildComponent,
-    Child2Component,
-    Child3Component,
     AddStudentComponent,
     StudentListComponent,
     NavbarComponent
@@ -24,9 +26,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxIndexedDBModule.forRoot(dbConfig)
   ],
-  providers: [],
+  providers: [IndexedDbService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

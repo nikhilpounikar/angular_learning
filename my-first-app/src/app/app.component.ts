@@ -1,8 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { ChildComponent } from './archived/child/child.component';
-import { Child2Component } from './archived/child-2/child-2.component';
-import { Child3Component } from './archived/child-3/child-3.component';
+import { Component, Input, OnInit } from '@angular/core';
 import { Student } from './models/student.model';
+import { IndexedDbService } from './services/indexed-db.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +8,12 @@ import { Student } from './models/student.model';
   styleUrls: ['./app.component.scss'],
 
 })
-export class AppComponent {
+export class AppComponent  {
 
     // Array to store the list of students
     students: Student[] = [];
+
+    
 
     // Method to handle the event emitted by the AddStudent component
     handleAddStudent(student: Student) {
@@ -26,6 +26,16 @@ export class AppComponent {
     }
 
 
+    constructor(private indexedDbService: IndexedDbService) {}
+
+    ngOnInit(): void {
+      this.configureIndexedDB();
+    }
+  
+    private configureIndexedDB(): void {
+      this.indexedDbService.configureDatabase();
+    }
+    
 
 
 

@@ -1,5 +1,5 @@
-// student.service.ts
 import { Injectable } from '@angular/core';
+import { Student } from '../models/student.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IndexedDbService } from './indexed-db.service';
 
@@ -7,6 +7,7 @@ import { IndexedDbService } from './indexed-db.service';
   providedIn: 'root'
 })
 export class StudentService {
+
   private studentsSubject = new BehaviorSubject<any[]>([]);
   students$ = this.studentsSubject.asObservable();
 
@@ -18,15 +19,20 @@ export class StudentService {
     return this.students$;
   }
 
-  addStudent(newStudent: any): void {
-    this.indexedDbService.addStudent(newStudent).subscribe(() => {
+  async addStudent(newStudent: any) {
+      await this.indexedDbService.addStudent(newStudent)
       this.loadStudents();
-    });
   }
 
-  private loadStudents(): void {
+  private async loadStudents() {
     this.indexedDbService.getAllStudents().subscribe((students) => {
-      this.studentsSubject.next(students);
-    });
+          this.studentsSubject.next(students);
+      });
   }
+
+  // private loadStudents(): void {
+  //   this.indexedDbService.getAllStudents().subscribe((students) => {
+  //     this.studentsSubject.next(students);
+  //   });
+  // }
 }
