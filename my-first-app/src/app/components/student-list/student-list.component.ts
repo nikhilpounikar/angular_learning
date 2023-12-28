@@ -7,7 +7,7 @@ import { StudentService } from 'src/app/services/student.service';
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.scss']
 })
-export class StudentListComponent implements OnInit {
+export class StudentListComponent implements OnInit{
 
 
   students: Student[];
@@ -16,10 +16,12 @@ export class StudentListComponent implements OnInit {
     this.students = [];
   }
 
-  ngOnInit(): void {
+  ngOnInit():void{
     this.studentService.getAllStudents().subscribe((students) => {
       this.students = students;
     });
   }
+
+
 
 }

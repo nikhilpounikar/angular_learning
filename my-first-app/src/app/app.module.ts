@@ -12,7 +12,7 @@ import { IndexedDbService } from './services/indexed-db.service';
 
 const dbConfig: DBConfig = {
   name: 'studentDB',
-  version: 1,
+  version: 2,
   objectStoresMeta: []
 };
 

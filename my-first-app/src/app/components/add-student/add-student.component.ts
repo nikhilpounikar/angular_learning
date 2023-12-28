@@ -14,6 +14,9 @@ export class AddStudentComponent {
   constructor(private studentService: StudentService) {}
 
   addStudent(): void {
+    this.studentService.studentListLengthObservable.subscribe((length)=>{
+      this.newStudent.id = length + 1;
+    })
     this.studentService.addStudent(this.newStudent);
     this.newStudent = new Student(0, '', '', 0); // Clear the form
   }

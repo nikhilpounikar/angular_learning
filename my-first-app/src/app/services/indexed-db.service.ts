@@ -110,7 +110,7 @@ export class IndexedDbService {
   
 
   addStudent(student: any): Observable<any> {
-    return from(this.dbService.add('students', student));
+    return this.dbService.add('students', student);
   }
   
   addStudentAndReloadList(newStudent: any): Observable<any[]> {
