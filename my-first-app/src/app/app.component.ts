@@ -8,6 +8,7 @@ import { Student } from './models/student.model';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+
 })
 export class AppComponent {
 

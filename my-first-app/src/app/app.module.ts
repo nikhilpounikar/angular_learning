@@ -9,6 +9,7 @@ import { Child2Component } from './archived/child-2/child-2.component';
 import { Child3Component } from './archived/child-3/child-3.component';
 import { AddStudentComponent } from './components/add-student/add-student.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { StudentListComponent } from './components/student-list/student-list.com
     Child2Component,
     Child3Component,
     AddStudentComponent,
-    StudentListComponent
+    StudentListComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

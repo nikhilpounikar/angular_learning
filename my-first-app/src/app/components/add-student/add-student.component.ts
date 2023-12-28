@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Student } from 'src/app/models/student.model';
+import { StudentService } from 'src/app/services/student.service';
 
 @Component({
   selector: 'add-student',
@@ -8,22 +9,13 @@ import { Student } from 'src/app/models/student.model';
 })
 export class AddStudentComponent {
 
-  // Define a property for student information using the Student model
   newStudent: Student = new Student(0, '', '', 0);
 
-  // EventEmitter to notify the parent component about the new student
-  @Output() addStudentEvent = new EventEmitter<Student>();
+  constructor(private studentService: StudentService) {}
 
-  // Method to add a new student and emit the event
-  addStudent() {
-
-    console.log(this.newStudent);
-    // Validate student data before emitting the event
-    if (this.newStudent.name && this.newStudent.age > 0) {
-      this.addStudentEvent.emit(this.newStudent);
-      // Clear input fields after adding a student
-      this.newStudent = new Student(0, '', '', 0);
-    }
+  addStudent(): void {
+    this.studentService.addStudent(this.newStudent);
+    this.newStudent = new Student(0, '', '', 0); // Clear the form
   }
 
 }
