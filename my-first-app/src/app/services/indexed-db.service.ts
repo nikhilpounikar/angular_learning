@@ -81,7 +81,7 @@
 import { Injectable } from '@angular/core';
 import { NgxIndexedDBService, ObjectStoreMeta } from 'ngx-indexed-db';
 import { Student } from '../models/student.model';
-import { Observable, from } from 'rxjs';
+import { Observable, from, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -109,13 +109,21 @@ export class IndexedDbService {
   }
   
 
-  // getAllStudents(){
-   
-  // }
-
-  addStudent(student:any){
-    this.dbService.add('students',student).subscribe(value => {
-      console.log("Student Added");
-    });
+  addStudent(student: any): Observable<any> {
+    return from(this.dbService.add('students', student));
   }
+  
+  addStudentAndReloadList(newStudent: any): Observable<any[]> {
+    return this.getAllStudents().pipe(
+      switchMap((studentList: any[]) => {
+        // Add a new student
+        return this.addStudent(newStudent).pipe(
+          // Fetch the updated student list
+          switchMap(() => this.getAllStudents())
+        );
+      })
+    );
+  }
+  
+  
 }

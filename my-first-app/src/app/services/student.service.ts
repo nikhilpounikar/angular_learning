@@ -19,12 +19,29 @@ export class StudentService {
     return this.students$;
   }
 
-  async addStudent(newStudent: any) {
-      await this.indexedDbService.addStudent(newStudent)
-      this.loadStudents();
+   addStudent(newStudent: any) {
+      this.indexedDbService.addStudentAndReloadList(newStudent).subscribe(
+        (updatedStudentList: any[]) => {
+          console.log('Updated Student List:', updatedStudentList);
+        },
+        (error) => {
+          console.error('Error adding student and reloading list:', error);
+        }
+      )
+  
+      // this.loadStudents();
   }
 
-  private async loadStudents() {
+  this.addStudentAndReloadList(newStudent).subscribe(
+    (updatedStudentList: any[]) => {
+      console.log('Updated Student List:', updatedStudentList);
+    },
+    (error) => {
+      console.error('Error adding student and reloading list:', error);
+    }
+  );
+
+  private loadStudents() {
     this.indexedDbService.getAllStudents().subscribe((students) => {
           this.studentsSubject.next(students);
       });
