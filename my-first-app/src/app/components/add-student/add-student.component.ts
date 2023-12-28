@@ -16,6 +16,8 @@ export class AddStudentComponent {
 
   // Method to add a new student and emit the event
   addStudent() {
+
+    console.log(this.newStudent);
     // Validate student data before emitting the event
     if (this.newStudent.name && this.newStudent.age > 0) {
       this.addStudentEvent.emit(this.newStudent);
