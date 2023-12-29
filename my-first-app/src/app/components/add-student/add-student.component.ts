@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Student } from 'src/app/models/student.model';
+import { IndexedDbService } from 'src/app/services/indexed-db.service';
 import { StudentService } from 'src/app/services/student.service';
 
 @Component({
@@ -9,16 +11,18 @@ import { StudentService } from 'src/app/services/student.service';
 })
 export class AddStudentComponent {
 
-  newStudent: Student = new Student(0, '', '', 0);
+  newStudent: Student = new Student( '', '', 0);
 
-  constructor(private studentService: StudentService) {}
+  private subscription!: Subscription;
+
+  constructor(private indexedDbService: IndexedDbService) {}
 
   addStudent(): void {
-    this.studentService.studentListLengthObservable.subscribe((length)=>{
-      this.newStudent.id = length + 1;
-    })
-    this.studentService.addStudent(this.newStudent);
-    this.newStudent = new Student(0, '', '', 0); // Clear the form
+    
+    this.indexedDbService.addStudent(this.newStudent).subscribe((studentId)=>{
+      console.log(studentId);
+      this.newStudent = new Student( '', '', 0); // Clear the form
+    });
   }
 
 }
