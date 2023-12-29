@@ -87,7 +87,7 @@ import { Observable, from, switchMap } from 'rxjs';
   providedIn: 'root'
 })
 export class IndexedDbService {
- 
+  
   constructor(private dbService: NgxIndexedDBService) {}
 
   public configureDatabase(): void {
@@ -133,4 +133,9 @@ export class IndexedDbService {
   updateStudent(student: Student) {
     return this.dbService.update('students',student);
   }
+
+  deleteStudent(studentId: number) {
+    return this.dbService.deleteByKey('students',studentId);
+  }
+ 
 }

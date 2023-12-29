@@ -10,10 +10,6 @@ import { StudentService } from 'src/app/services/student.service';
   styleUrls: ['./student-list.component.scss']
 })
 export class StudentListComponent implements OnInit{
-deleteStudent(arg0: number) {
-throw new Error('Method not implemented.');
-}
-
 
   students: Student[];
 
@@ -23,19 +19,29 @@ throw new Error('Method not implemented.');
     this.students = [];
   }
 
-  ngOnInit():void{
+  private fetchStudents():void{
     this.subscription = this.indexedDbService.getAllStudents().subscribe((students) => {
       console.log("Student List",students);
       this.students = students;
     });
   }
+  ngOnInit():void{
+    this.fetchStudents();
+  }
 
   ngOnDestory():void{
-
     if(this.subscription)
      this.subscription.unsubscribe();
   }
   
+  deleteStudent(studentId: number) {
+    
+    this.subscription = this.indexedDbService.deleteStudent(studentId).subscribe((status) => {
 
+        if(status)
+         this.fetchStudents();
+    });
+  }
+    
 
 }
