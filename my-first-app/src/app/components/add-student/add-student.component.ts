@@ -27,4 +27,12 @@ export class AddStudentComponent {
     });
   }
 
+  ngOnDestroy(){
+
+    console.log('Destroying Subscription... from add student');
+
+    if(this.subscription)
+     this.subscription.unsubscribe();
+  }
+
 }
