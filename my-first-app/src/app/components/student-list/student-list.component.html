@@ -8,7 +8,7 @@
           <th>Name</th>
           <th>Address</th>
           <th>Age</th>
-          <th>Action</th>
+          <th >Action</th>
         </tr>
       </thead>
       <tbody>
@@ -17,7 +17,9 @@
           <td>{{ student.name }}</td>
           <td>{{ student.address }}</td>
           <td>{{ student.age }}</td>
-          <td><a [routerLink]="['/update-student', student.id]">Update</a></td>
+          <td class="action-col"><button [routerLink]="['/update-student', student.id]">Update</button>
+            <button class="btn-delete" (click)="deleteStudent(student.id)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
