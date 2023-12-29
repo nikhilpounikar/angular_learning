@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Student } from 'src/app/models/student.model';
+import { IndexedDbService } from 'src/app/services/indexed-db.service';
 import { StudentService } from 'src/app/services/student.service';
 
 @Component({
@@ -12,16 +14,25 @@ export class StudentListComponent implements OnInit{
 
   students: Student[];
 
-  constructor(private studentService: StudentService) {
+  private subscription!: Subscription;
+
+  constructor(private indexedDbService: IndexedDbService) {
     this.students = [];
   }
 
   ngOnInit():void{
-    this.studentService.getAllStudents().subscribe((students) => {
+    this.subscription = this.indexedDbService.getAllStudents().subscribe((students) => {
+      console.log("Student List",students);
       this.students = students;
     });
   }
 
+  ngOnDestory():void{
+
+    if(this.subscription)
+     this.subscription.unsubscribe();
+  }
+  
 
 
 }
