@@ -16,6 +16,7 @@
           <td>{{ student.name }}</td>
           <td>{{ student.address }}</td>
           <td>{{ student.age }}</td>
+          <td><a [routerLink]="['/update-student', student.id]">Update</a></td>
         </tr>
       </tbody>
     </table>
