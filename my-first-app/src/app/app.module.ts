@@ -9,6 +9,7 @@ import { StudentListComponent } from './components/student-list/student-list.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 import { IndexedDbService } from './services/indexed-db.service';
+import { UpdateStudentComponent } from './components/update-student/update-student.component';
 
 const dbConfig: DBConfig = {
   name: 'studentDB',
@@ -21,7 +22,8 @@ const dbConfig: DBConfig = {
     AppComponent,
     AddStudentComponent,
     StudentListComponent,
-    NavbarComponent
+    NavbarComponent,
+    UpdateStudentComponent
   ],
   imports: [
     BrowserModule,
