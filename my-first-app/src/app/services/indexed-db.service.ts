@@ -87,6 +87,7 @@ import { Observable, from, switchMap } from 'rxjs';
   providedIn: 'root'
 })
 export class IndexedDbService {
+ 
   constructor(private dbService: NgxIndexedDBService) {}
 
   public configureDatabase(): void {
@@ -125,5 +126,8 @@ export class IndexedDbService {
     );
   }
   
+  fetchStudentById(studentId: number):Observable<Student> {
+    return this.dbService.getByID('students',studentId);
+  }
   
 }

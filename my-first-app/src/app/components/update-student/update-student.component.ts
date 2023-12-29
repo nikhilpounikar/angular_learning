@@ -12,6 +12,7 @@ export class UpdateStudentComponent implements OnInit {
 
 
   student!: Student;
+  hasStudentFetched:boolean = false;
 
   private studentId!:number;
   constructor(private studentService: StudentService,private route: ActivatedRoute) {}
@@ -25,7 +26,17 @@ export class UpdateStudentComponent implements OnInit {
      else 
       this.studentId = -1;
 
+     this.fetchStudentDetail();
      console.log('Student ID:', this.studentId);
+  }
+
+  private fetchStudentDetail():void{
+
+    this.studentService.fetchStudent(this.studentId).subscribe((studentData)=>{
+
+      this.hasStudentFetched = true;
+      this.student = studentData;
+    })
   }
 
   updateStudent(): void {

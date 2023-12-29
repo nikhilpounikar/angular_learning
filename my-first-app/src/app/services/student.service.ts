@@ -7,6 +7,7 @@ import { IndexedDbService } from './indexed-db.service';
   providedIn: 'root',
 })
 export class StudentService {
+
   private studentsSubject = new BehaviorSubject<any[]>([]);
   students$ = this.studentsSubject.asObservable();
 
@@ -31,14 +32,6 @@ export class StudentService {
     this.loadStudents();
   }
 
-  // this.addStudentAndReloadList(newStudent).subscribe(
-  //   (updatedStudentList: any[]) => {
-  //     console.log('Updated Student List:', updatedStudentList);
-  //   },
-  //   (error) => {
-  //     console.error('Error adding student and reloading list:', error);
-  //   }
-  // );
 
   private loadStudents() {
     this.indexedDbService.getAllStudents().subscribe((students) => {
@@ -46,9 +39,8 @@ export class StudentService {
     });
   }
 
-  // private loadStudents(): void {
-  //   this.indexedDbService.getAllStudents().subscribe((students) => {
-  //     this.studentsSubject.next(students);
-  //   });
-  // }
+  fetchStudent(studentId: number):Observable<Student> {
+    return this.indexedDbService.fetchStudentById(studentId);
+  }
+
 }

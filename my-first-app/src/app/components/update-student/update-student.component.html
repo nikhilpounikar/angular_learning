@@ -1,6 +1,9 @@
 <!-- add-student.component.html -->
-<div class="update-student-container">
-    <h2>Add Student</h2>
+<div class="loader" *ngIf="!hasStudentFetched">
+    <h1>Loading...</h1>
+</div>
+<div class="update-student-container" *ngIf="hasStudentFetched">
+    <h2>Edit Student</h2>
     <form (ngSubmit)="updateStudent()" #studentForm="ngForm">
       <div class="form-group">
         <label for="studentName">Name:</label>
