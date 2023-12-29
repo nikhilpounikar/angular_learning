@@ -11,11 +11,13 @@ import { StudentService } from 'src/app/services/student.service';
 })
 export class AddStudentComponent {
 
-  newStudent: Student = new Student( '', '', 0);
+  newStudent!: Student;
 
   private subscription!: Subscription;
 
-  constructor(private indexedDbService: IndexedDbService) {}
+  constructor(private indexedDbService: IndexedDbService) {
+    this.newStudent = new Student( '', '', 0);
+  }
 
   addStudent(): void {
     
