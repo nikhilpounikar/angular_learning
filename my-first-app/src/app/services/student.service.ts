@@ -8,6 +8,7 @@ import { IndexedDbService } from './indexed-db.service';
 })
 export class StudentService {
 
+
   private studentsSubject = new BehaviorSubject<any[]>([]);
   students$ = this.studentsSubject.asObservable();
 
@@ -41,6 +42,10 @@ export class StudentService {
 
   fetchStudent(studentId: number):Observable<Student> {
     return this.indexedDbService.fetchStudentById(studentId);
+  }
+
+  updateStudent(student: Student) {
+    return this.indexedDbService.updateStudent(student);
   }
 
 }

@@ -2,49 +2,64 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from 'src/app/models/student.model';
 import { StudentService } from 'src/app/services/student.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'update-student',
   templateUrl: './update-student.component.html',
-  styleUrls: ['./update-student.component.scss']
+  styleUrls: ['./update-student.component.scss'],
 })
 export class UpdateStudentComponent implements OnInit {
-
-
   student!: Student;
-  hasStudentFetched:boolean = false;
+  hasStudentFetched: boolean = false;
 
-  private studentId!:number;
-  constructor(private studentService: StudentService,private route: ActivatedRoute) {}
+  private studentId!: number;
+  private subscription!: Subscription;
+
+  constructor(
+    private studentService: StudentService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-     // Retrieve student ID from route parameters
+    // Retrieve student ID from route parameters
 
-     const param = this.route.snapshot.paramMap.get('id');
-     if(param != null)
-      this.studentId = parseInt(param);
-     else 
-      this.studentId = -1;
+    const param = this.route.snapshot.paramMap.get('id');
+    if (param != null) this.studentId = parseInt(param);
+    else this.studentId = -1;
 
-     this.fetchStudentDetail();
-     console.log('Student ID:', this.studentId);
+    this.fetchStudentDetail();
+    console.log('Student ID:', this.studentId);
   }
 
-  private fetchStudentDetail():void{
-
-    this.studentService.fetchStudent(this.studentId).subscribe((studentData)=>{
-
-      this.hasStudentFetched = true;
-      this.student = studentData;
-    })
+  private fetchStudentDetail(): void {
+    this.subscription = this.studentService
+      .fetchStudent(this.studentId)
+      .subscribe((studentData) => {
+        this.hasStudentFetched = true;
+        this.student = studentData;
+      });
   }
 
   updateStudent(): void {
-    this.studentService.studentListLengthObservable.subscribe((length)=>{
-      this.student.id = length + 1;
-    })
-    this.studentService.addStudent(this.student);
-    this.student = new Student(0, '', '', 0); // Clear the form
+    if (this.student) {
+      this.student.id = this.studentId;
+      this.subscription = this.studentService
+        .updateStudent(this.student)
+        .subscribe((updatedStudent) => {
+          if (updatedStudent) {
+            // After updating, navigate back to the student-list component
+            this.router.navigate(['/home']);
+          }
+        });
+    }
   }
 
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 }

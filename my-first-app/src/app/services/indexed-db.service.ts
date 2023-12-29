@@ -130,4 +130,7 @@ export class IndexedDbService {
     return this.dbService.getByID('students',studentId);
   }
   
+  updateStudent(student: Student) {
+    return this.dbService.update('students',student);
+  }
 }
