@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Course } from '../models/course.model';
 export enum CourseActionType {
-  ADD_ITEM = '[COURSE] Add Course',
+  ADD_ITEM = 'add-course',
 }
 export class AddItemAction implements Action {
   readonly type = CourseActionType.ADD_ITEM;
