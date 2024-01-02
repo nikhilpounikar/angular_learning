@@ -12,10 +12,13 @@ import { State as AppState } from 'src/app/store/models/state.model';
 export class CourseListComponent {
 
   courses$: Observable<Array<Course>>;
-  
+
   constructor(private store: Store<AppState>) {
-    this.courses$ = this.store.select((store) => store.courses);
+    this.courses$ = this.store.select(store => store.courses);
   }
 
+  ngOnInit(): void {
+    this.courses$ = this.store.select((store) => store.courses);
+  }
 
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AddItemAction } from 'src/app/store/actions/course.action';
+import { AddItemAction, CourseActionType } from 'src/app/store/actions/course.action';
 import { Course } from 'src/app/store/models/course.model';
 import { State as AppState } from 'src/app/store/models/state.model';
 

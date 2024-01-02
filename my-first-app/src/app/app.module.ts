@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { courseReducer as CourseReducer } from './store/reducers/course.reducer';
+import { courseReducer } from './store/reducers/course.reducer';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +14,7 @@ import { Action, ActionReducer, StoreModule } from '@ngrx/store';
 import { Course } from './store/models/course.model';
 import { AddCourseComponent } from './components/add-course/add-course.component';
 import { CourseListComponent } from './components/course-list/course-list.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 const dbConfig: DBConfig = {
   name: 'studentDB',
@@ -37,8 +38,9 @@ const dbConfig: DBConfig = {
     FormsModule,
     NgxIndexedDBModule.forRoot(dbConfig),
     StoreModule.forRoot({
-      course: CourseReducer as ActionReducer<Course[], Action>,
+      courses: courseReducer as ActionReducer<Course[], Action>,
     }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [IndexedDbService],
   bootstrap: [AppComponent],
