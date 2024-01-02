@@ -27,6 +27,10 @@ export class AddCourseComponent {
   }
 
   addCourse(form: NgForm) {
+
+    if(!form.value.id)
+     form.value.id = this.generateCourseID();
+
     this.store.dispatch(new AddItemAction(form.value));
     console.log(form.value);
     form.reset();
@@ -34,7 +38,7 @@ export class AddCourseComponent {
 
    private generateCourseID():string{
     const length = 12; // You can adjust the length as needed
-    const characters = 'COURSE-';
+    const characters = 'COURSE';
     let result = '';
   
     for (let i = 0; i < length; i++) {
