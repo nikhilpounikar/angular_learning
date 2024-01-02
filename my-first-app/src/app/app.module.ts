@@ -13,6 +13,7 @@ import { UpdateStudentComponent } from './components/update-student/update-stude
 import { Action, ActionReducer, StoreModule } from '@ngrx/store';
 import { Course } from './store/models/course.model';
 import { AddCourseComponent } from './components/add-course/add-course.component';
+import { CourseListComponent } from './components/course-list/course-list.component';
 
 const dbConfig: DBConfig = {
   name: 'studentDB',
@@ -28,6 +29,7 @@ const dbConfig: DBConfig = {
     NavbarComponent,
     UpdateStudentComponent,
     AddCourseComponent,
+    CourseListComponent,
   ],
   imports: [
     BrowserModule,

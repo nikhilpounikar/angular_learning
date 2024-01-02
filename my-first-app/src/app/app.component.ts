@@ -1,10 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Student } from './models/student.model';
 import { IndexedDbService } from './services/indexed-db.service';
-import { Observable } from 'rxjs';
-import { Course } from './store/models/course.model';
-import { Store } from '@ngrx/store';
-import { State as AppState } from './store/models/state.model';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +9,6 @@ import { State as AppState } from './store/models/state.model';
 
 })
 export class AppComponent  {
-
-
-    courses$: Observable<Array<Course>>;
-
 
     // Array to store the list of students
     students: Student[] = [];
@@ -34,8 +26,7 @@ export class AppComponent  {
     }
 
 
-    constructor(private indexedDbService: IndexedDbService,private store: Store<AppState>) {
-      this.courses$ = this.store.select((store) => store.courses);
+    constructor(private indexedDbService: IndexedDbService) {
     }
 
     ngOnInit(): void {

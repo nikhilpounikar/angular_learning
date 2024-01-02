@@ -1,28 +1,33 @@
 <!-- add-student.component.html -->
 <div class="add-course-container">
     <h2>Add course</h2>
-    <form (ngSubmit)="addCourse()" #courseForm="ngForm">
-      <div class="form-group">
-        <label for="courseName">Name:</label>
-        <input type="text" id="courseName" name="courseName" [(ngModel)]="newCourse.name" required />
-      </div>
+    <form (ngSubmit)="addCourse(courseForm)" #courseForm="ngForm">
 
-      <div class="form-group">
-        <label for="courseCurrency">Currency:</label>
-        <input type="text" id="courseCurrency" name="courseCurrency" placeholder="INR" disabled="true" [(ngModel)]="newCourse.currency" required />
-      </div>
-  
-      <div class="form-group">
-        <label for="coursePrice">Price:</label>
-        <input type="number" id="coursePrice" name="coursePrice" [(ngModel)]="newCourse.price" required />
-      </div>
-  
-      <div class="form-group">
-        <label for="courseDescription">Description:</label>
-        <input type="text" id="courseDescription" name="courseDescription" [(ngModel)]="newCourse.description" required />
-      </div>
-  
-      <button type="submit">Add course</button>
+        <div class="form-group">
+            <input type="text" id="courseId" hidden="true" [(ngModel)]="courseId" name="id" required />
+        </div>
+
+        <div class="form-group">
+            <label for="courseName">Name:</label>
+            <input type="text" id="courseName" ngModel name="courseName" required />
+        </div>
+
+        <div class="form-group">
+            <label for="courseCurrency">Currency:</label>
+            <input type="text" id="courseCurrency" ngModel name="courseCurrency" placeholder="INR" disabled="true"
+                required />
+        </div>
+
+        <div class="form-group">
+            <label for="coursePrice">Price:</label>
+            <input type="number" id="coursePrice" ngModel name="coursePrice" required />
+        </div>
+
+        <div class="form-group">
+            <label for="courseDescription">Description:</label>
+            <input type="text" id="courseDescription" ngModel name="courseDescription" required />
+        </div>
+
+        <button type="submit">Add course</button>
     </form>
-  </div>
-  
+</div>

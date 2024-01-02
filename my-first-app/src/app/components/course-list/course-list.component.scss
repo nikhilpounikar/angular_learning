@@ -1,0 +1,47 @@
+/* course-list.component.css */
+
+table {
+    width: fit-content;
+    min-width: 50%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin: auto;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    // text-align: left;
+    text-align: center;
+    
+  }
+  
+  th {
+    background-color: #4caf50;
+    color: white;
+    width: 20%;
+  }
+
+  .action-col{
+    // width: fit-content;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  button{
+    background-color: #4caf50;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    font-weight: bold;
+    width: fit-content;
+    cursor: pointer;
+  }
+
+  .btn-delete{
+    background-color: #df4923;
+  }

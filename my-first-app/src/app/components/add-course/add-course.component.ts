@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AddItemAction } from 'src/app/store/actions/course.action';
 import { Course } from 'src/app/store/models/course.model';
+import { State as AppState } from 'src/app/store/models/state.model';
+
 
 @Component({
   selector: 'add-course',
@@ -7,23 +12,27 @@ import { Course } from 'src/app/store/models/course.model';
   styleUrls: ['./add-course.component.scss'],
 })
 export class AddCourseComponent {
-  newCourse!: Course;
+  // newCourse!: Course;
+  courseId:string
 
-  constructor() {
-    this.newCourse = {
-      id: this.generateCourseID(),
-      name: '',
-      price: 999,
-      currency: 'INR',
-      description: '',
-    };
+  constructor(private store: Store<AppState>) {
+    // this.newCourse = {
+    //   id: this.generateCourseID(),
+    //   name: '',
+    //   price: 999,
+    //   currency: 'INR',
+    //   description: '',
+    // };
+    this.courseId = this.generateCourseID();
   }
 
-  addCourse(): void {
-    console.log('Adding Course');
+  addCourse(form: NgForm) {
+    this.store.dispatch(new AddItemAction(form.value));
+    console.log(form.value);
+    form.reset();
   }
 
-  private generateCourseID():string{
+   private generateCourseID():string{
     const length = 12; // You can adjust the length as needed
     const characters = 'COURSE-';
     let result = '';
