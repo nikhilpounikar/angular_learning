@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 import { IndexedDbService } from './services/indexed-db.service';
 import { UpdateStudentComponent } from './components/update-student/update-student.component';
+import { StoreModule } from '@ngrx/store';
 
 const dbConfig: DBConfig = {
   name: 'studentDB',
@@ -29,7 +30,8 @@ const dbConfig: DBConfig = {
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxIndexedDBModule.forRoot(dbConfig)
+    NgxIndexedDBModule.forRoot(dbConfig),
+    StoreModule.forRoot({}, {})
   ],
   providers: [IndexedDbService],
   bootstrap: [AppComponent]
