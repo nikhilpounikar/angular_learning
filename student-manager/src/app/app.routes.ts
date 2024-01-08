@@ -8,17 +8,22 @@ import { LoginComponent } from './components/public/login/login.component';
 
 export const routes: Routes = [
   {
-    path: 'dashboard',
+    path: '',
+    component: PublicLayoutComponent,
+    children: [
+      { path: '', component: LoginComponent },
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+    ],
+  },
+  {
+    path: '',
     component: PrivateLayoutComponent,
+    canActivate: [CanActivateViaAuthGuard],
     // canActivate: [CanActivateViaAuthGuard],
   },
-  { path: '', component: PublicLayoutComponent, pathMatch: 'full',
-    children:[
-      {
-        path:'login',component:LoginComponent
-      }
-    ]
-  },
-  { path: '', component: PublicLayoutComponent, pathMatch: 'full' },
+
   { path: '**', component: NotFoundComponent },
 ];

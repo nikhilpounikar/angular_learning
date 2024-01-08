@@ -11,6 +11,6 @@ export class CanActivateViaAuthGuard implements CanActivate {
   canActivate() {
     // return this.store.select(getUserAuthStatus);
 
-    return true;
+    return false;
   }
 }
