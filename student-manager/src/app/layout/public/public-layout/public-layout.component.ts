@@ -7,8 +7,6 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [
     RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
     PublicHeaderComponent,
   ],
   templateUrl: './public-layout.component.html',
