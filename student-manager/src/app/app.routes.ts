@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { PublicLayoutComponent } from './layout/public/public-layout/public-layout.component';
-import { PrivateLayoutComponent } from './layout/private/private-layout/private-layout.component';
+import { PrivateLayoutComponent } from './layout/private/private-layout.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/public/login/login.component';
 import { SignUpComponent } from './components/public/sign-up/sign-up.component';
