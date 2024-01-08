@@ -8,6 +8,13 @@ import { LoginComponent } from './components/public/login/login.component';
 import { SignUpComponent } from './components/public/sign-up/sign-up.component';
 
 export const routes: Routes = [
+
+  {
+    path: '',
+    component: PrivateLayoutComponent,
+    canActivate: [CanActivateViaAuthGuard],
+    // canActivate: [CanActivateViaAuthGuard],
+  },
   {
     path: '',
     component: PublicLayoutComponent,
@@ -23,12 +30,7 @@ export const routes: Routes = [
       },
     ],
   },
-  {
-    path: '',
-    component: PrivateLayoutComponent,
-    canActivate: [CanActivateViaAuthGuard],
-    // canActivate: [CanActivateViaAuthGuard],
-  },
+ 
 
   { path: '**', component: NotFoundComponent },
 ];
