@@ -7,7 +7,7 @@ import { State as AppState } from 'src/app/store/models/state.model';
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.scss']
+  styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent {
 

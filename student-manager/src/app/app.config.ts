@@ -11,7 +11,13 @@ const dbConfig: DBConfig = {
   objectStoresMeta: [],
 };
 
-
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes),importProvidersFrom(NgxIndexedDBModule.forRoot(dbConfig))]
+  providers: [
+    provideRouter(routes),
+    importProvidersFrom(
+      NgxIndexedDBModule.forRoot(dbConfig),
+      
+    ),
+    
+  ],
 };

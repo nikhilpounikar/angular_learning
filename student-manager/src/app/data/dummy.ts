@@ -91,61 +91,61 @@ export const dummyCourses: Course[] = [
     {
       courseId: '1',
       courseName: 'Math',
-      price: '100',
+      price: 100.00,
       students: ['John Doe', 'Jane Smith']
     },
     {
       courseId: '2',
       courseName: 'Physics',
-      price: '120',
+      price: 120.00,
       students: ['Alice Johnson', 'Bob Anderson']
     },
     {
       courseId: '3',
       courseName: 'Chemistry',
-      price: '90',
+      price: 90.00,
       students: ['Eva Williams', 'Michael Brown']
     },
     {
       courseId: '4',
       courseName: 'Biology',
-      price: '110',
+      price: 110.00,
       students: ['Sophia Davis', 'William Taylor']
     },
     {
       courseId: '5',
       courseName: 'Computer Science',
-      price: '130',
+      price: 130.00,
       students: ['Olivia Martinez', 'Daniel Rodriguez']
     },
     {
       courseId: '6',
       courseName: 'Programming',
-      price: '150',
+      price: 150.00,
       students: ['John Doe', 'Jane Smith']
     },
     {
       courseId: '7',
       courseName: 'Geography',
-      price: '80',
+      price: 80.00,
       students: ['Alice Johnson', 'Bob Anderson']
     },
     {
       courseId: '8',
       courseName: 'Sociology',
-      price: '95',
+      price: 95.00,
       students: ['Eva Williams', 'Michael Brown']
     },
     {
       courseId: '9',
       courseName: 'Economics',
-      price: '120',
+      price: 120.00,
       students: ['Sophia Davis', 'William Taylor']
     },
     {
       courseId: '10',
       courseName: 'Political Science',
-      price: '110',
+      price: 110.00,
       students: ['Olivia Martinez', 'Daniel Rodriguez']
     },
     // Add 10 more courses as needed

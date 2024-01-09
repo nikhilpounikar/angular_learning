@@ -28,6 +28,6 @@ export class UserAuthenticatedGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     // Your guard logic here
-    return true; // or false based on your conditions
+    return false; // or false based on your conditions
   }
 }
