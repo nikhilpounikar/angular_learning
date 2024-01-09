@@ -1,19 +1,21 @@
-<div class="container mt-5">
+<main class="form-signin w-100 m-auto mt-5">
   <h2>User Registration</h2>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      <label for="firstName" class="form-label">First Name</label>
-      <input type="text" class="form-control" id="firstName" formControlName="firstName">
+    <div class="form-floating my-2">
+      <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="John">
+      <label for="firstName">First Name</label>
     </div>
-    <div class="mb-3">
-      <label for="lastName" class="form-label">Last Name</label>
-      <input type="text" class="form-control" id="lastName" formControlName="lastName">
+
+    <div class="form-floating my-2">
+      <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Doe">
+      <label for="lastName">Last Name</label>
     </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" formControlName="email">
+
+    <div class="form-floating my-2">
+      <input type="email" class="form-control" id="email" formControlName="email" placeholder="abc@gmail.com">
+      <label for="email">Email</label>
     </div>
     <!-- Add other form controls as needed -->
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-dark w-100">Register</button>
   </form>
-</div>
+</main>
