@@ -5,7 +5,6 @@ export class User {
     firstName: string;
     lastName: string;
     email: string;
-    isAdmin: boolean;
     accessToken: string;
   // Add other properties as needed
   constructor(user:User) {
@@ -14,7 +13,6 @@ export class User {
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.email = user.email;
-    this.isAdmin = user.isAdmin;
     this.accessToken = user.accessToken;
   }
 

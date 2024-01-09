@@ -11,5 +11,5 @@ export class Student {
       this.address = address;
       this.age = age;
     }
-  }
+}
   
