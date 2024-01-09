@@ -5,12 +5,17 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/public/login/login.component';
 import { SignUpComponent } from './components/public/sign-up/sign-up.component';
 import { UserAuthenticatedGuard } from './guards/authenticated';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: PrivateLayoutComponent,
-    children: [{ path: '**', component: NotFoundComponent }],
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {path:"dashboard",component:DashboardComponent},
+      { path: '**', component: NotFoundComponent },
+    ],
     // canActivate: [userAuthenticatedGuard],
     canActivate: [UserAuthenticatedGuard],
   },

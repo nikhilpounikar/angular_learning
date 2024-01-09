@@ -51,10 +51,8 @@
     </symbol>
 </svg>
 
-<main class="d-flex flex-nowrap">
-
-
-    <div class="flex-shrink-0 p-3" style="width: 280px;">
+<main class="d-flex flex-nowrap justify-content-center">
+    <div class="flex-shrink-0 p-3  height-75" style="width: 250px;">
         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
             <svg class="bi pe-none me-2" width="30" height="24">
                 <use xlink:href="#bootstrap" />
@@ -63,55 +61,42 @@
         </a>
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
-                <div>
-                    <a class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                        Home
-                    </a>
-                    <ul class="collapse show" id="home-collapse"
-                        class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#"
-                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                        <li><a href="#"
-                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a></li>
-                        <li><a href="#"
-                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                     data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
                     Dashboard
                 </button>
                 <div class="collapse" id="dashboard-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#"
+                        <li><a routerLink ="/dashboard"
                                 class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a>
-                        </li>
-                        <li><a href="#"
-                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                        <li><a href="#"
-                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
                     </ul>
                 </div>
             </li>
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                    data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                    Orders
+                    data-bs-toggle="collapse" data-bs-target="#students-collapse" aria-expanded="false">
+                    Students
                 </button>
-                <div class="collapse" id="orders-collapse">
+                <div class="collapse" id="students-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a>
+                        <li><a routerLink ="/students" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Students List</a>
                         </li>
-                        <li><a href="#"
-                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
-                        <li><a href="#"
-                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
-                        <li><a href="#"
-                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
+                        <li><a routerLink ="/students/add"
+                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Add Student</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="mb-1">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#courses-collapse" aria-expanded="false">
+                    Courses
+                </button>
+                <div class="collapse" id="courses-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a routerLink ="/courses" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Courses List</a>
+                        </li>
+                        <li><a routerLink ="/courses/add"
+                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Add Course</a></li>
                     </ul>
                 </div>
             </li>
@@ -123,13 +108,9 @@
                 </button>
                 <div class="collapse" id="account-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a>
-                        </li>
-                        <li><a href="#"
+                        <li><a routerLink ="/profile"
                                 class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                        <li><a href="#"
-                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
+                        <li><a routerLink ="/profile/sign-out" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
                                 out</a></li>
                     </ul>
                 </div>

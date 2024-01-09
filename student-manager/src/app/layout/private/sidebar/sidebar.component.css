@@ -145,3 +145,9 @@
   .scrollarea {
     overflow-y: auto;
   }
+
+  .height-75{
+
+    height: 75vh;
+    overflow-y: scroll;
+  }
