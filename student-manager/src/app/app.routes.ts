@@ -6,6 +6,11 @@ import { LoginComponent } from './components/public/login/login.component';
 import { SignUpComponent } from './components/public/sign-up/sign-up.component';
 import { UserAuthenticatedGuard } from './guards/authenticated';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StudentListComponent } from './components/student/student-list/student-list.component';
+import { AddStudentComponent } from './components/student/add-student/add-student.component';
+import { CourseListComponent } from './components/course/course-list/course-list.component';
+import { AddCourseComponent } from './components/course/add-course/add-course.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -13,7 +18,27 @@ export const routes: Routes = [
     component: PrivateLayoutComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      {path:"dashboard",component:DashboardComponent},
+      { path: 'dashboard', component: DashboardComponent },
+      {
+        path: 'students',
+        children: [
+          { path: '', pathMatch: 'full', component: StudentListComponent },
+          {path:'add',component:AddStudentComponent}
+        ],
+      },
+      {
+        path: 'courses',
+        children: [
+          { path: '', pathMatch: 'full', component: CourseListComponent },
+          {path:'add',component:AddCourseComponent}
+        ],
+      },
+      {
+        path: 'profile',
+        children: [
+          { path: '', pathMatch: 'full', component: ProfileComponent },
+        ],
+      },
       { path: '**', component: NotFoundComponent },
     ],
     // canActivate: [userAuthenticatedGuard],
