@@ -7,10 +7,10 @@ import { SignUpComponent } from './components/public/sign-up/sign-up.component';
 import { UserAuthenticatedGuard } from './guards/authenticated';
 
 export const routes: Routes = [
-
   {
     path: '',
     component: PrivateLayoutComponent,
+    children: [{ path: '**', component: NotFoundComponent }],
     // canActivate: [userAuthenticatedGuard],
     canActivate: [UserAuthenticatedGuard],
   },
@@ -18,7 +18,7 @@ export const routes: Routes = [
     path: '',
     component: PublicLayoutComponent,
     children: [
-      { path: '',redirectTo:'/login', pathMatch:'full' },
+      { path: '', redirectTo: '/login', pathMatch: 'full' },
       {
         path: 'login',
         component: LoginComponent,
@@ -29,7 +29,6 @@ export const routes: Routes = [
       },
     ],
   },
- 
 
   { path: '**', component: NotFoundComponent },
 ];
