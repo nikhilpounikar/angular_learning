@@ -6,6 +6,7 @@ export class User {
     lastName: string;
     email: string;
     accessToken: string;
+    password:string;
   // Add other properties as needed
   constructor(user:User) {
 
@@ -14,6 +15,7 @@ export class User {
     this.lastName = user.lastName;
     this.email = user.email;
     this.accessToken = user.accessToken;
+    this.password = user.password;
   }
 
 }
