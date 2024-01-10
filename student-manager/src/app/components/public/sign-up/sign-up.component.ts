@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../../models/user';
 import { CommonModule } from '@angular/common';
+import { CustomValidationService } from '../../../services/custom-validation.service';
 
 @Component({
   selector: 'sign-up',
@@ -13,14 +14,16 @@ import { CommonModule } from '@angular/common';
 export class SignUpComponent {
   userForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private customValidator:CustomValidationService) {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email,this.customValidator.validateEmailNotTaken.bind(this.customValidator)]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
       // Add other form controls as needed
+    },{
+      validator:this.customValidator.passwordMatchValidator('password','confirmPassword')
     });
   }
 

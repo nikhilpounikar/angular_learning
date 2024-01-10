@@ -4,6 +4,7 @@ import { Observable, from, switchMap } from 'rxjs';
 import { Student } from '../models/student';
 import { dummyCourses, dummyStudents } from '../data/dummy';
 import { Course } from '../models/course';
+import { User } from '../models/user';
 
 @Injectable({ providedIn: 'root',})
 export class IndexedDbService {
@@ -13,6 +14,8 @@ export class IndexedDbService {
   constructor(private dbService: NgxIndexedDBService) {
     this.students = dummyStudents;
     this.courses = dummyCourses;
+
+    this.configureDatabase();
   }
 
   public configureDatabase(): void {
@@ -41,11 +44,12 @@ export class IndexedDbService {
     };
 
     const userObjectStoreMeta: ObjectStoreMeta = {
-        store: 'courses',
+        store: 'users',
         storeConfig: { keyPath: 'id', autoIncrement: true }, // Adjust keyPath and autoIncrement based on your requirements
         storeSchema: [
           { name: 'firstName', keypath: 'firstName', options: { unique: false } },
           { name: 'lastName', keypath: 'lastName', options: { unique: false } },
+          { name: 'password', keypath: 'password', options: { unique: false } },
           { name: 'email', keypath: 'email', options: { unique: true } },
           { name: 'accessToken', keypath: 'accessToken', options: { unique: false } },
           // Add other properties specific to the courses collection
@@ -71,6 +75,10 @@ export class IndexedDbService {
     return from(this.courses);
   }
   
+  findUserByEmail(email:string):Observable<User>{
+ 
+    return this.dbService.getByIndex('users', 'email', email);;
+  }
 
   addStudent(student: any): Observable<any> {
     return this.dbService.add('students', student);

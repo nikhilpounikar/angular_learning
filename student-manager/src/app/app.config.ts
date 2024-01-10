@@ -7,7 +7,7 @@ import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 
 const dbConfig: DBConfig = {
   name: 'studentDB',
-  version: 1,
+  version: 10,
   objectStoresMeta: [],
 };
 
