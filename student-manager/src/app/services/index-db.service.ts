@@ -14,51 +14,6 @@ export class IndexedDbService {
   constructor(private dbService: NgxIndexedDBService) {
     this.students = dummyStudents;
     this.courses = dummyCourses;
-
-    this.configureDatabase();
-  }
-
-  public configureDatabase(): void {
-    const studentObjectStoreMeta: ObjectStoreMeta = {
-      store: 'students',
-      storeConfig: { keyPath: 'studentId', autoIncrement: false },
-      storeSchema: [
-        { name: 'name', keypath: 'name', options: { unique: false } },
-        { name: 'email', keypath: 'email', options: { unique: true } },
-        { name: 'dateOfBirth', keypath: 'dateOfBirth', options: { unique: false } },
-        { name: 'gender', keypath: 'gender', options: { unique: false } },
-        { name: 'courses', keypath: 'courses', options: { unique: false } }
-
-      ]
-    };
-
-    const coursesObjectStoreMeta: ObjectStoreMeta = {
-        store: 'courses',
-        storeConfig: { keyPath: 'courseId', autoIncrement: false }, // Adjust keyPath and autoIncrement based on your requirements
-        storeSchema: [
-          { name: 'courseName', keypath: 'courseName', options: { unique: false } },
-          { name: 'price', keypath: 'price', options: { unique: false } },
-          { name: 'students', keypath: 'students', options: { unique: false } },
-          // Add other properties specific to the courses collection
-        ]
-    };
-
-    const userObjectStoreMeta: ObjectStoreMeta = {
-        store: 'users',
-        storeConfig: { keyPath: 'id', autoIncrement: true }, // Adjust keyPath and autoIncrement based on your requirements
-        storeSchema: [
-          { name: 'firstName', keypath: 'firstName', options: { unique: false } },
-          { name: 'lastName', keypath: 'lastName', options: { unique: false } },
-          { name: 'password', keypath: 'password', options: { unique: false } },
-          { name: 'email', keypath: 'email', options: { unique: true } },
-          { name: 'accessToken', keypath: 'accessToken', options: { unique: false } },
-          // Add other properties specific to the courses collection
-        ]
-    };
-
-    this.dbService.createObjectStore(studentObjectStoreMeta);
-    this.dbService.createObjectStore(coursesObjectStoreMeta);
-    this.dbService.createObjectStore(userObjectStoreMeta);
   }
 
   getAllStudents(): Observable<Student> {
@@ -76,12 +31,16 @@ export class IndexedDbService {
   }
   
   findUserByEmail(email:string):Observable<User>{
- 
+
     return this.dbService.getByIndex('users', 'email', email);;
   }
 
   addStudent(student: any): Observable<any> {
     return this.dbService.add('students', student);
+  }
+
+  addUser(user: User): Observable<User> {
+    return this.dbService.add('users', user);
   }
   
 //   addStudentAndReloadList(newStudent: any): Observable<any[]> {

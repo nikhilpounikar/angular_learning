@@ -12,8 +12,8 @@
     </div>
 
     <div class="form-floating my-2">
-      <input type="email" class="form-control" id="email" formControlName="email" placeholder="abc@gmail.com"
-      [ngClass]="{'is-invalid':userForm.get('email')?.errors && userForm.get('email')?.touched}">
+      <input type="text" class="form-control" id="email" formControlName="email" placeholder="abc@gmail.com"
+      [ngClass]="{'is-invalid': userForm.get('email')?.errors && userForm.get('email')?.touched}">
       <label for="email">Email</label>
       <div class="invalid-feedback" *ngIf="userForm.get('email')?.hasError('emailTaken')">
         Email Already Exits
@@ -35,5 +35,4 @@
     <!-- Add other form controls as needed -->
     <button type="submit" class="btn btn-dark w-100">Register</button>
   </form>
-
 </main>

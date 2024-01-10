@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { Observable, map } from 'rxjs';
 import { IndexedDbService } from './index-db.service';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -36,11 +37,24 @@ export class CustomValidationService {
   }
 
   validateEmailNotTaken(control: AbstractControl) {
-    return this.dbService.findUserByEmail(control.value).subscribe(user => user? null: {emailTaken:true});
+ 
+    return this.checkEmailNotTaken(control.value).pipe(
+      map(res => {
+        return res ? null : { emailTaken: true };
+      })
+    );
+
   }
 
   //Fake API call -- You can have this in another service
-  checkUsernameTaken(username: string): boolean {
-    return false;
+  checkEmailNotTaken(email: string): Observable<boolean> {
+
+    return this.dbService.findUserByEmail(email).pipe(
+      map((user: User) =>
+        
+        user ? false:true
+      ),
+     
+    );
   }
 }
