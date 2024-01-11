@@ -16,11 +16,11 @@ export class IndexedDbService {
     this.courses = dummyCourses;
   }
 
-  getAllStudents(): Observable<Student> {
+  getAllStudents(): Observable<Student[]> {
     // Use the 'from' function to convert the promise returned by 'getAll' into an observable
     //return from(this.dbService.getAll('students'));
 
-    return from(this.students);
+    return this.dbService.getAll('students');
   }
 
   getAllCourses(): Observable<Course> {
