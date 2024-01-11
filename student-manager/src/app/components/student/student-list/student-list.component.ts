@@ -3,11 +3,12 @@ import { IndexedDbService } from '../../../services/index-db.service';
 import { Student } from '../../../models/student';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [DatePipe,CommonModule],
+  imports: [DatePipe,CommonModule,RouterLink],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })

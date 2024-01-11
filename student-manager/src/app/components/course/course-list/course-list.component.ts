@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Course } from '../../../models/course';
 import { IndexedDbService } from '../../../services/index-db.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Student } from '../../../models/student';
 
 @Component({
   selector: 'app-course-list',
@@ -13,21 +15,63 @@ import { Subscription } from 'rxjs';
 })
 export class CourseListComponent {
   courses: Course[];
-
+  studentCourse:Course[];
   private subscription!: Subscription;
+  studentId:string;
+  isIndividualStudentViewed: boolean;
+  student?:Student;
 
-  constructor(private dbService: IndexedDbService) {
+  constructor(private dbService: IndexedDbService,private route: ActivatedRoute) {
     this.courses = [];
+    this.studentCourse = [];
+    this.studentId = '';
+    this.isIndividualStudentViewed = false;
+
   }
 
   private fetchCourses(): void {
     this.subscription = this.dbService.getAllCourses().subscribe((courses) => {
-      console.log('Course List', courses);
+      
       this.courses = courses;
+
+      if (this.studentId) {
+        this.isIndividualStudentViewed = true;
+        this.fetchCoursesByStudentId(this.studentId);
+      }
     });
-   
   }
+
+  private fetchCoursesByStudentId(studentId: string) {
+    this.subscription = this.dbService
+      .fetchStudentById(studentId)
+      .subscribe((student) => {
+
+        this.student = student;
+        
+        this.filterCourses(student);
+       
+     
+       
+      });
+  }
+
+  private filterCourses(student:Student){
+
+    this.studentCourse = this.courses.filter(
+      (course) => student.courses.includes(course.courseId)
+    );
+
+    this.courses = this.courses.filter(
+      (course) => !student.courses.includes(course.courseId)
+    );
+    
+    console.log('Student Courses',this.studentCourse);
+    console.log('Remaining Courses',this.courses);
+
+  }
+
   ngOnInit(): void {
+    this.studentId = this.route.snapshot.params['id'];
     this.fetchCourses();
   }
 
@@ -41,5 +85,13 @@ export class CourseListComponent {
       .subscribe((status) => {
         if (status) this.fetchCourses();
       });
+  }
+
+  addCourseToStudent(courseId:string){
+
+    if(courseId && this.studentId && this.student){
+      this.student.courses.push(courseId);
+      this.dbService.updateStudent(this.student).subscribe((student)=>this.fetchCourses());
+    }
   }
 }

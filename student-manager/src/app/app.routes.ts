@@ -23,14 +23,17 @@ export const routes: Routes = [
         path: 'students',
         children: [
           { path: '', pathMatch: 'full', component: StudentListComponent },
-          {path:'add',component:AddStudentComponent}
+          {path:'add',component:AddStudentComponent},
+          {path:'update/:id',component:AddStudentComponent},
         ],
       },
       {
         path: 'courses',
         children: [
           { path: '', pathMatch: 'full', component: CourseListComponent },
-          {path:'add',component:AddCourseComponent}
+          {path:'add',component:AddCourseComponent},
+          {path:'view/:id',component:CourseListComponent},
+          {path:'update/:id',component:AddCourseComponent}
         ],
       },
       {

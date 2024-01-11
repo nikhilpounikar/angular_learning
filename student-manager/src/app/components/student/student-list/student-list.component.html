@@ -19,7 +19,7 @@
           <td>{{ student.email }}</td>
           <td>{{ student.dateOfBirth | date:'shortDate' }}</td>
           <td>{{ student.gender }}</td>
-          <td>{{ student.courses.join(', ') }}</td>
+          <td><button [routerLink]="['/private/courses/view', student.studentId]" class="btn btn-dark w-50">View</button></td>
         </tr>
       </tbody>
     </table>

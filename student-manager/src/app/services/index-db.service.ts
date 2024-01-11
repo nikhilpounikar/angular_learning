@@ -9,6 +9,7 @@ import { User } from '../models/user';
 @Injectable({ providedIn: 'root',})
 export class IndexedDbService {
   
+  
   students:Student[];  
   courses:Course[];  
   constructor(private dbService: NgxIndexedDBService) {
@@ -68,7 +69,7 @@ export class IndexedDbService {
 //     );
 //   }
   
-  fetchStudentById(studentId: number):Observable<Student> {
+  fetchStudentById(studentId: string):Observable<Student> {
     return this.dbService.getByID('students',studentId);
   }
   
@@ -83,6 +84,17 @@ export class IndexedDbService {
 
   addCourse(course: any): Observable<Course> {
     return this.dbService.add('courses', course);
+  }
+
+
+  getCoursesById(courseId:String[]):Observable<Course[]>  {
+    
+    return this.dbService.getAllByIndex('courses', 'courseName', IDBKeyRange.only(courseId));
+    // return this.dbService.getByID('courses',courseId);
+  }
+
+  deleteCourse(courseId: number) {
+    return this.dbService.deleteByKey('courses',courseId);
   }
  
 }
