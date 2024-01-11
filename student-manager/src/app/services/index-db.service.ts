@@ -23,11 +23,11 @@ export class IndexedDbService {
     return this.dbService.getAll('students');
   }
 
-  getAllCourses(): Observable<Course> {
+  getAllCourses(): Observable<Course[]> {
     // Use the 'from' function to convert the promise returned by 'getAll' into an observable
-    //return from(this.dbService.getAll('students'));
+    return this.dbService.getAll('courses');
 
-    return from(this.courses);
+    // return from(this.courses);
   }
   
   findUserByEmail(email:string):Observable<User>{
