@@ -11,6 +11,7 @@ import { CustomValidationService } from '../../../services/custom-validation.ser
 import { IndexedDbService } from '../../../services/index-db.service';
 import { SessionStorageService } from '../../../services/session-storage.service';
 import { Router } from '@angular/router';
+import { RedirectionService } from '../../../services/redirection.service';
 
 @Component({
   selector: 'sign-up',
@@ -26,8 +27,7 @@ export class SignUpComponent {
     private fb: FormBuilder,
     private customValidator: CustomValidationService,
     private dbService: IndexedDbService,
-    private sessionStorage:SessionStorageService,
-    private router: Router
+    private redirectionService: RedirectionService
   ) {
     this.userForm = this.fb.group(
       {
@@ -53,24 +53,16 @@ export class SignUpComponent {
 
   onSubmit() {
     if (this.userForm.valid) {
-
-
       this.userForm.value.id = this.generateUniqueKey();
       const user: User = new User(this.userForm.value);
       this.dbService
         .addUser(user)
-        .subscribe((user:User) => this.navigateToDashBoard(user.id));
+        .subscribe((user: User) =>
+          this.redirectionService.navigateToDashBoard(user.id)
+        );
       // Add logic to send the user registration data to your backend
     } else {
       console.log(this.userForm);
-    }
-  }
-
-  private navigateToDashBoard(userId: string) {
-    if (userId) {
-      //const accessToken =
-      this.sessionStorage.saveObjectToSessionStorage('accessToken',userId);
-      this.router.navigate(['./#/dashboard']);
     }
   }
 

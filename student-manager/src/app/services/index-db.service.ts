@@ -32,7 +32,13 @@ export class IndexedDbService {
   
   findUserByEmail(email:string):Observable<User>{
 
-    return this.dbService.getByIndex('users', 'email', email);;
+    return this.dbService.getByIndex('users', 'email', email);
+  }
+
+  getUserByEmail(email:string):Observable<User[]>{
+
+    return this.dbService.getAllByIndex('users', 'email', IDBKeyRange.only(email));
+    // return this.dbService.getByIndex('users', 'email', email);
   }
 
   addStudent(student: any): Observable<any> {

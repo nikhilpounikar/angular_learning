@@ -14,7 +14,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   {
-    path: '#',
+    path: 'private',
     component: PrivateLayoutComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

@@ -13,26 +13,27 @@
 
     <div class="form-floating my-2">
       <input type="text" class="form-control" id="email" formControlName="email" placeholder="abc@gmail.com"
-      [ngClass]="{'is-invalid': userForm.get('email')?.errors && userForm.get('email')?.touched}">
+      [ngClass]="{'is-invalid': userForm.get('email')?.errors && userForm.get('email')?.touched}" autocomplete="username">
       <label for="email">Email</label>
       <div class="invalid-feedback" *ngIf="userForm.get('email')?.hasError('emailTaken')">
         Email Already Exits
       </div>
     </div>
     <div class="form-floating my-2">
-      <input type="password" class="form-control" id="password" formControlName="password" placeholder="1234">
+      <input type="password" class="form-control" id="password" formControlName="password" placeholder="1234" autocomplete="new-password">
       <label for="password">Password</label>
     </div>
     <div class="form-floating my-2">
       <input type="password" class="form-control is-invalid" id="confirmPassword" formControlName="confirmPassword"
         [ngClass]="{'is-invalid':userForm.get('confirmPassword')?.errors && userForm.get('confirmPassword')?.touched}"
-        placeholder="1111">
+        placeholder="1111" autocomplete="new-password">
       <label for="confirmPassword">Confirm Password</label>
       <div class="invalid-feedback" *ngIf="userForm.get('confirmPassword')?.hasError('passwordMismatch')">
         Password Do not Match
       </div>
     </div>
     <!-- Add other form controls as needed -->
-    <button type="submit" class="btn btn-dark w-100">Register</button>
+    <button [disabled]="userForm.invalid" type="submit" class="btn btn-dark w-100">Register</button>
   </form>
+
 </main>

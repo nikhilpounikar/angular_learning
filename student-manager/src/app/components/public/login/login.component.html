@@ -21,16 +21,22 @@
 
 <main class="form-signin w-100 m-auto mt-5">
   <h2>Please sign in</h2>
-  <form>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="form-floating my-2">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input type="email" class="form-control"
+      formControlName="email"
+      [ngClass]="{'is-invalid': email?.errors && email?.touched}" autocomplete="username"
+      placeholder="name@example.com">
       <label for="floatingInput">Email address</label>
+      <div class="invalid-feedback" *ngIf="email?.hasError('email')">
+        Invalid Email
+      </div>
     </div>
     <div class="form-floating my-2">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
+      <input type="password" class="form-control" id="password" formControlName="password" autocomplete="new-password">
+      <label for="password">Password</label>
     </div>
-    <button type="submit" class="btn btn-dark w-100">Login</button>
+    <button [disabled]="loginForm.invalid" type="submit" class="btn btn-dark w-100">Login</button>
 
   </form>
 </main>
