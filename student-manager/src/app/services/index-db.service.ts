@@ -79,5 +79,10 @@ export class IndexedDbService {
   deleteStudent(studentId: number) {
     return this.dbService.deleteByKey('students',studentId);
   }
+
+
+  addCourse(course: any): Observable<Course> {
+    return this.dbService.add('courses', course);
+  }
  
 }
