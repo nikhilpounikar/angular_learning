@@ -41,13 +41,20 @@ export class IndexedDbService {
     // return this.dbService.getByIndex('users', 'email', email);
   }
 
-  addStudent(student: any): Observable<any> {
-    return this.dbService.add('students', student);
-  }
-
   addUser(user: User): Observable<User> {
     return this.dbService.add('users', user);
   }
+
+  addStudent(student: any): Observable<Student> {
+    return this.dbService.add('students', student);
+  }
+
+  findStudentByEmail(email:string):Observable<Student>{
+
+    return this.dbService.getByIndex('students', 'email', email);
+  }
+
+  
   
 //   addStudentAndReloadList(newStudent: any): Observable<any[]> {
 //     return this.getAllStudents().pipe(
