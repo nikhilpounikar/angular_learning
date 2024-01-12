@@ -106,6 +106,6 @@ export class StudentListComponent {
 
     student?.courses.push(courseId);
 
-    if (student) this.dbService.updateStudent(student);
+    if (student) this.dbService.updateStudent(student).subscribe(stu=>console.log(stu));
   }
 }

@@ -1,3 +1,9 @@
+
+<div class="container my-3">
+
+  <button routerLink="/private/students/add" class="btn btn-dark">Add Stduent</button>
+</div>
+
 <!-- student-list.component.html -->
 <div class="container custom-table" *ngIf="isIndividualCourseViewes">
   <h2>Student List for {{this.course?.courseName}}</h2>
@@ -13,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students">
+      <tr *ngFor="let student of studentByCourse">
         <td>{{ student.studentId }}</td>
         <td>{{ student.name }}</td>
         <td>{{ student.email }}</td>

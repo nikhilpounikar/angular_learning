@@ -9,29 +9,30 @@ import { Student } from '../../../models/student';
 @Component({
   selector: 'app-course-list',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css',
 })
 export class CourseListComponent {
   courses: Course[];
-  studentCourse:Course[];
+  studentCourse: Course[];
   private subscription!: Subscription;
-  studentId:string;
+  studentId: string;
   isIndividualStudentViewed: boolean;
-  student?:Student;
+  student?: Student;
 
-  constructor(private dbService: IndexedDbService,private route: ActivatedRoute) {
+  constructor(
+    private dbService: IndexedDbService,
+    private route: ActivatedRoute
+  ) {
     this.courses = [];
     this.studentCourse = [];
     this.studentId = '';
     this.isIndividualStudentViewed = false;
-
   }
 
   private fetchCourses(): void {
     this.subscription = this.dbService.getAllCourses().subscribe((courses) => {
-      
       this.courses = courses;
 
       if (this.studentId) {
@@ -45,29 +46,23 @@ export class CourseListComponent {
     this.subscription = this.dbService
       .fetchStudentById(studentId)
       .subscribe((student) => {
-
         this.student = student;
-        
+
         this.filterCourses(student);
-       
-     
-       
       });
   }
 
-  private filterCourses(student:Student){
-
-    this.studentCourse = this.courses.filter(
-      (course) => student.courses.includes(course.courseId)
+  private filterCourses(student: Student) {
+    this.studentCourse = this.courses.filter((course) =>
+      student.courses.includes(course.courseId)
     );
 
     this.courses = this.courses.filter(
       (course) => !student.courses.includes(course.courseId)
     );
-    
-    console.log('Student Courses',this.studentCourse);
-    console.log('Remaining Courses',this.courses);
 
+    console.log('Student Courses', this.studentCourse);
+    console.log('Remaining Courses', this.courses);
   }
 
   ngOnInit(): void {
@@ -87,28 +82,29 @@ export class CourseListComponent {
       });
   }
 
-  addCourseToStudent(courseId:string){
-
-    if(courseId && this.studentId && this.student){
+  addCourseToStudent(courseId: string) {
+    if (courseId && this.studentId && this.student) {
       this.student.courses.push(courseId);
-      this.dbService.updateStudent(this.student).subscribe((student)=>this.fetchCourses());
-      
-      this.mapCourseToStudent(courseId,this.studentId);
+      this.dbService
+        .updateStudent(this.student)
+        .subscribe((student) => this.fetchCourses());
+
+      this.mapCourseToStudent(courseId, this.studentId);
     }
   }
 
-  private mapCourseToStudent(courseId: string,studentId:string){
+  private mapCourseToStudent(courseId: string, studentId: string) {
+    let course = this.courses.find((course) => course.courseId === courseId);
 
-    let course = this.courses.find(course => course.courseId === courseId);
-
-    if(!course){
-      course = this.studentCourse.find(course => course.courseId === courseId);
+    if (!course) {
+      course = this.studentCourse.find(
+        (course) => course.courseId === courseId
+      );
     }
 
     course?.students.push(studentId);
 
-    if(course)
-     this.dbService.updateCourse(course);
-
+    if (course)
+      this.dbService.updateCourse(course).subscribe((cou) => console.log(cou));
   }
 }
