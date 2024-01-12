@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,6 +9,8 @@ import {
 import { CustomValidationService } from '../../../services/custom-validation.service';
 import { IndexedDbService } from '../../../services/index-db.service';
 import { RedirectionService } from '../../../services/redirection.service';
+import { ActivatedRoute } from '@angular/router';
+import { Student } from '../../../models/student';
 
 @Component({
   selector: 'app-add-student',
@@ -18,27 +20,56 @@ import { RedirectionService } from '../../../services/redirection.service';
   styleUrl: './add-student.component.css',
 })
 export class AddStudentComponent {
-
-  
   addStudentForm: FormGroup;
-
+  isUpdating: boolean;
+  studentId: string;
+  student?: Student;
 
   constructor(
     private fb: FormBuilder,
     private customValidator: CustomValidationService,
     private dbService: IndexedDbService,
-    private redirectionService: RedirectionService
+    private redirectionService: RedirectionService,
+    private route: ActivatedRoute
   ) {
-    this.addStudentForm = this.fb.group(
+    this.isUpdating = false;
+    this.studentId = '';
+    this.studentId = this.route.snapshot.params['id'];
+
+    this.addStudentForm = this.prepareFormData();
+  }
+
+  ngOnInit(): void {
+    this.studentId = this.route.snapshot.params['id'];
+
+    if (this.studentId) {
+      this.isUpdating=true;
+      this.dbService.fetchStudentById(this.studentId).subscribe((student) => {
+        this.student = student;
+        this.addStudentForm = this.prepareFormData();
+        this.disableEmail();
+      });
+    }
+  }
+
+  private prepareFormData() {
+    let duplicateEmailValidator =
+      this.customValidator.validateStudentEmailNotTaken.bind(
+        this.customValidator
+      );
+
+    return this.fb.group(
       {
-        name: ['', Validators.required],
+        studentId: this.student?.studentId,
+        name: [this.student?.name || '', Validators.required],
         email: [
-          '',
+          this.student?.email || '',
           [Validators.required, Validators.email],
-          this.customValidator.validateStudentEmailNotTaken.bind(this.customValidator),
+          ,
+          duplicateEmailValidator,
         ],
-        dateOfBirth: [null, [Validators.required]],
-        gender: ['', [Validators.required]],
+        dateOfBirth: [this.student?.dateOfBirth || '', [Validators.required]],
+        gender: [this.student?.gender || '', [Validators.required]],
       },
       {
         validator: this.customValidator.passwordMatchValidator(
@@ -47,6 +78,10 @@ export class AddStudentComponent {
         ),
       }
     );
+  }
+
+  disableEmail() {
+    this.email?.disable();
   }
 
   get email() {
@@ -67,23 +102,39 @@ export class AddStudentComponent {
 
   addStudent() {
     if (this.addStudentForm.valid) {
-      this.addStudentForm.value.studentId = this.generateUniqueKey();
-      this.addStudentForm.value.courses = [];
+      if (this.isUpdating && this.addStudentForm.value) {
+        
+        this.addStudentForm.value.email = this.student?.email;
+        this.addStudentForm.value.courses = this.student?.courses;
 
-      this.dbService
-        .addStudent(this.addStudentForm.value)
-        .subscribe((student) => {
-          alert(student.name+" is added.");
-          this.resetFormData();
-        });
+        this.dbService
+          .updateStudent(this.addStudentForm.value)
+          .subscribe((student) => {
+            if (student) {
+              this.redirectionService.navigateToStudentList();
+            } else {
+              alert('Failed to Update Student');
+            }
+          });
+      } else {
+        this.addStudentForm.value.studentId = this.generateUniqueKey();
+        this.addStudentForm.value.courses = [];
+
+        this.dbService
+          .addStudent(this.addStudentForm.value)
+          .subscribe((student) => {
+            alert(student.name + ' is added.');
+            this.resetFormData();
+          });
+      }
+
       // Add logic to send the user registration data to your backend
     } else {
-      alert('Invalid input')
+      alert('Invalid input');
     }
   }
 
-  private resetFormData(){
-
+  private resetFormData() {
     this.addStudentForm.reset();
   }
 

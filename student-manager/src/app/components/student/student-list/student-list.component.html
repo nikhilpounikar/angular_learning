@@ -59,7 +59,7 @@
           <td><button [routerLink]="['/private/courses/view', student.studentId]" class="btn btn-dark w-50">View</button></td>
           <td *ngIf="isIndividualCourseViewes"><button (click)="addStudentToCourse(student.studentId)" class="btn btn-dark w-50">Add</button></td>
           <td>
-            <button class="btn btn-dark w-25 mx-1 p-1">Edit</button>
+            <button [routerLink]="['/private/students/update', student.studentId]" class="btn btn-dark w-25 mx-1">Edit</button>
             <button (click)="deleteStudent(student.studentId)" class="btn btn-dark w-50 mx-1">Delete</button>
           </td>
         </tr>

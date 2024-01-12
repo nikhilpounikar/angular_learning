@@ -8,6 +8,11 @@ import { User } from '../models/user';
 })
 export class RedirectionService {
 
+
+  navigateToStudentList() {
+    this.router.navigate(['./private/students']);
+  }
+
   constructor(private sessionStorage:SessionStorageService,private router:Router) { }
 
 

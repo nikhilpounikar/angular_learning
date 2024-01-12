@@ -9,6 +9,7 @@ import { Student } from '../models/student';
   providedIn: 'root',
 })
 export class CustomValidationService {
+  
   constructor( private dbService:IndexedDbService) {}
 
   passwordMatchValidator(password: string, confirmPassword: string) {
