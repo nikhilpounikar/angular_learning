@@ -81,11 +81,14 @@ export class IndexedDbService {
     return this.dbService.deleteByKey('students',studentId);
   }
 
-
+ // Related to courses
   addCourse(course: any): Observable<Course> {
     return this.dbService.add('courses', course);
   }
 
+  fetchCourseById(courseId: string):Observable<Course> {
+    return this.dbService.getByID('courses',courseId);
+  }
 
   getCoursesById(courseId:String[]):Observable<Course[]>  {
     
@@ -95,6 +98,10 @@ export class IndexedDbService {
 
   deleteCourse(courseId: number) {
     return this.dbService.deleteByKey('courses',courseId);
+  }
+
+  updateCourse(course: Course) {
+    return this.dbService.update('courses',course);
   }
  
 }

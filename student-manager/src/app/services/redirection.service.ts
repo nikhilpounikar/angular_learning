@@ -14,7 +14,7 @@ export class RedirectionService {
     if (userId) {
       //const accessToken =
       this.sessionStorage.saveObjectToSessionStorage('accessToken', userId);
-      this.router.navigate(['./#/dashboard']);
+      this.router.navigate(['./private/dashboard']);
     }
   }
 }

@@ -24,6 +24,7 @@ export const routes: Routes = [
         children: [
           { path: '', pathMatch: 'full', component: StudentListComponent },
           {path:'add',component:AddStudentComponent},
+          {path:'view/:id',component:StudentListComponent},
           {path:'update/:id',component:AddStudentComponent},
         ],
       },

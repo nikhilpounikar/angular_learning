@@ -28,6 +28,7 @@
           <th>Course ID</th>
           <th>Name</th>
           <th>Price (INR)</th>
+          <th>Stduents</th>
           <th *ngIf="isIndividualStudentViewed">Action</th>
         </tr>
       </thead>
@@ -37,6 +38,8 @@
           <td>{{ course.courseId }}</td>
           <td>{{ course.courseName }}</td>
           <td>{{ course.price.toFixed(2) }}</td>
+          
+          <td><button [routerLink]="['/private/students/view', course.courseId]" class="btn btn-dark w-50">View</button></td>
           <td *ngIf="isIndividualStudentViewed"><button (click)="addCourseToStudent(course.courseId)" class="btn btn-dark w-50">Add</button></td>
         </tr>
       </tbody>

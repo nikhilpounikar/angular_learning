@@ -1,4 +1,31 @@
 <!-- student-list.component.html -->
+<div class="container custom-table" *ngIf="isIndividualCourseViewes">
+  <h2>Student List for {{this.course?.courseName}}</h2>
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Student ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Date of Birth</th>
+        <th>Gender</th>
+        <th>Courses</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.studentId }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.dateOfBirth | date:'shortDate' }}</td>
+        <td>{{ student.gender }}</td>
+        <td><button [routerLink]="['/private/courses/view', student.studentId]" class="btn btn-dark w-50">View</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- student-list.component.html -->
 <div class="container custom-table">
     <h2>Student List</h2>
     <table class="table table-striped">
@@ -10,6 +37,7 @@
           <th>Date of Birth</th>
           <th>Gender</th>
           <th>Courses</th>
+          <th *ngIf="isIndividualCourseViewes">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +48,7 @@
           <td>{{ student.dateOfBirth | date:'shortDate' }}</td>
           <td>{{ student.gender }}</td>
           <td><button [routerLink]="['/private/courses/view', student.studentId]" class="btn btn-dark w-50">View</button></td>
+          <td *ngIf="isIndividualCourseViewes"><button (click)="addStudentToCourse(student.studentId)" class="btn btn-dark w-50">Add</button></td>
         </tr>
       </tbody>
     </table>

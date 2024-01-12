@@ -3,45 +3,109 @@ import { IndexedDbService } from '../../../services/index-db.service';
 import { Student } from '../../../models/student';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Course } from '../../../models/course';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [DatePipe,CommonModule,RouterLink],
+  imports: [DatePipe, CommonModule, RouterLink],
   templateUrl: './student-list.component.html',
-  styleUrl: './student-list.component.css'
+  styleUrl: './student-list.component.css',
 })
 export class StudentListComponent {
+  students: Student[];
+  studentByCourse: Student[];
+  courseId: string;
+  private subscription!: Subscription;
+  isIndividualCourseViewes: boolean;
+  course?: Course;
 
-    students:Student[]
-    private subscription!: Subscription;
+  constructor(
+    private dbService: IndexedDbService,
+    private route: ActivatedRoute
+  ) {
+    this.students = [];
+    this.studentByCourse = [];
+    this.courseId = '';
+    this.isIndividualCourseViewes = false;
+  }
 
-    constructor(private dbService:IndexedDbService){
-      this.students = [];
-    }
-
-    private fetchStudents():void{
-      this.subscription = this.dbService.getAllStudents().subscribe((students) => {
-        console.log("Student List",students);
+  private fetchStudents(): void {
+    this.subscription = this.dbService
+      .getAllStudents()
+      .subscribe((students) => {
+        console.log('Student List', students);
         this.students = students;
+
+        if (this.courseId) {
+          this.isIndividualCourseViewes = true;
+          this.fetchStudentsByCourseId(this.courseId);
+        }
       });
-    }
-    ngOnInit():void{
-      this.fetchStudents();
-    }
-  
-    ngOnDestory():void{
-      if(this.subscription)
-       this.subscription.unsubscribe();
-    }
-    
-    deleteStudent(studentId: number) {
-      
-      this.subscription = this.dbService.deleteStudent(studentId).subscribe((status) => {
-  
-          if(status)
-           this.fetchStudents();
+  }
+
+  private fetchStudentsByCourseId(courseId: string) {
+    this.subscription = this.dbService
+      .fetchCourseById(courseId)
+      .subscribe((course) => {
+        this.course = course;
+
+        this.filterStudents(course);
       });
+  }
+
+  private filterStudents(course: Course) {
+    this.studentByCourse = this.students.filter((student) =>
+      course.students.includes(student.studentId)
+    );
+
+    this.students = this.students.filter(
+      (student) => !course.students.includes(student.studentId)
+    );
+  }
+
+  ngOnInit(): void {
+    this.courseId = this.route.snapshot.params['id'];
+    this.fetchStudents();
+  }
+
+  ngOnDestory(): void {
+    if (this.subscription) this.subscription.unsubscribe();
+  }
+
+  deleteStudent(studentId: number) {
+    this.subscription = this.dbService
+      .deleteStudent(studentId)
+      .subscribe((status) => {
+        if (status) this.fetchStudents();
+      });
+  }
+
+  addStudentToCourse(studentId: string) {
+    if (studentId && this.courseId && this.course) {
+      this.course.students.push(studentId);
+      this.dbService
+        .updateCourse(this.course)
+        .subscribe((course) => this.fetchStudents());
+
+      this.mapStudentToCourse(studentId, this.courseId);
     }
+  }
+
+  private mapStudentToCourse(studentId: string, courseId: string) {
+    let student = this.students.find(
+      (student) => student.studentId === studentId
+    );
+
+    if (!student) {
+      student = this.studentByCourse.find(
+        (student) => student.studentId === studentId
+      );
+    }
+
+    student?.courses.push(courseId);
+
+    if (student) this.dbService.updateStudent(student);
+  }
 }

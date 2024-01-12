@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 import { Course } from '../../../models/course';
 import { IndexedDbService } from '../../../services/index-db.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
 import { Student } from '../../../models/student';
 
 @Component({
   selector: 'app-course-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css',
 })
@@ -92,6 +92,23 @@ export class CourseListComponent {
     if(courseId && this.studentId && this.student){
       this.student.courses.push(courseId);
       this.dbService.updateStudent(this.student).subscribe((student)=>this.fetchCourses());
+      
+      this.mapCourseToStudent(courseId,this.studentId);
     }
+  }
+
+  private mapCourseToStudent(courseId: string,studentId:string){
+
+    let course = this.courses.find(course => course.courseId === courseId);
+
+    if(!course){
+      course = this.studentCourse.find(course => course.courseId === courseId);
+    }
+
+    course?.students.push(studentId);
+
+    if(course)
+     this.dbService.updateCourse(course);
+
   }
 }
