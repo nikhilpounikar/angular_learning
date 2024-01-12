@@ -74,13 +74,13 @@ export class CourseListComponent {
     if (this.subscription) this.subscription.unsubscribe();
   }
 
-  deleteCourse(studentId: number) {
-    this.subscription = this.dbService
-      .deleteStudent(studentId)
-      .subscribe((status) => {
-        if (status) this.fetchCourses();
-      });
-  }
+  // deleteCourse(studentId: number) {
+  //   this.subscription = this.dbService
+  //     .deleteStudent(studentId)
+  //     .subscribe((status) => {
+  //       if (status) this.fetchCourses();
+  //     });
+  // }
 
   addCourseToStudent(courseId: string) {
     if (courseId && this.studentId && this.student) {

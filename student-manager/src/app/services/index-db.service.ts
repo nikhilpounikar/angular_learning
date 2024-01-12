@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgxIndexedDBService, ObjectStoreMeta } from 'ngx-indexed-db';
-import { Observable, from, switchMap } from 'rxjs';
+import { Observable, forkJoin, from, switchMap } from 'rxjs';
 import { Student } from '../models/student';
 import { dummyCourses, dummyStudents } from '../data/dummy';
 import { Course } from '../models/course';
@@ -81,7 +81,7 @@ export class IndexedDbService {
     return this.dbService.update('students',student);
   }
 
-  deleteStudent(studentId: number) {
+  deleteStudent(studentId: string) {
     return this.dbService.deleteByKey('students',studentId);
   }
 
@@ -106,6 +106,24 @@ export class IndexedDbService {
 
   updateCourse(course: Course) {
     return this.dbService.update('courses',course);
+  }
+
+  removeStudentFromAllCourses(studentId: string): Observable<Course[]> {
+    // Fetch all courses
+    return this.dbService.getAll('courses').pipe(
+      switchMap((courses: any[]) => {
+        const updateObservables = courses.map((course:Course) => {
+          // Remove the student with the given studentId
+          course.students = course.students.filter(id => id !== studentId);
+
+          // Update the course in the database
+          return this.dbService.update('courses', course);
+        });
+
+        // Use forkJoin to wait for all updates to complete
+        return forkJoin(updateObservables);
+      })
+    );
   }
  
 }

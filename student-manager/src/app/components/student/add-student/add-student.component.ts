@@ -18,7 +18,10 @@ import { RedirectionService } from '../../../services/redirection.service';
   styleUrl: './add-student.component.css',
 })
 export class AddStudentComponent {
+
+  
   addStudentForm: FormGroup;
+
 
   constructor(
     private fb: FormBuilder,

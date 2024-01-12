@@ -74,11 +74,16 @@ export class StudentListComponent {
     if (this.subscription) this.subscription.unsubscribe();
   }
 
-  deleteStudent(studentId: number) {
+  deleteStudent(studentId: string) {
     this.subscription = this.dbService
       .deleteStudent(studentId)
       .subscribe((status) => {
-        if (status) this.fetchStudents();
+
+        if (status){
+
+          this.fetchStudents();
+          this.dbService.removeStudentFromAllCourses(studentId).subscribe((courseList)=>console.log(courseList));
+        } 
       });
   }
 

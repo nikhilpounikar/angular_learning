@@ -16,6 +16,7 @@
         <th>Date of Birth</th>
         <th>Gender</th>
         <th>Courses</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
         <td>{{ student.dateOfBirth | date:'shortDate' }}</td>
         <td>{{ student.gender }}</td>
         <td><button [routerLink]="['/private/courses/view', student.studentId]" class="btn btn-dark w-50">View</button></td>
+        
       </tr>
     </tbody>
   </table>
@@ -43,7 +45,8 @@
           <th>Date of Birth</th>
           <th>Gender</th>
           <th>Courses</th>
-          <th *ngIf="isIndividualCourseViewes">Action</th>
+          <th *ngIf="isIndividualCourseViewes">Map Course</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -55,6 +58,10 @@
           <td>{{ student.gender }}</td>
           <td><button [routerLink]="['/private/courses/view', student.studentId]" class="btn btn-dark w-50">View</button></td>
           <td *ngIf="isIndividualCourseViewes"><button (click)="addStudentToCourse(student.studentId)" class="btn btn-dark w-50">Add</button></td>
+          <td>
+            <button class="btn btn-dark w-25 mx-1 p-1">Edit</button>
+            <button (click)="deleteStudent(student.studentId)" class="btn btn-dark w-50 mx-1">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
