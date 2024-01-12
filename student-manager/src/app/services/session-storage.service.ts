@@ -32,7 +32,6 @@ export class SessionStorageService {
 
   hasAccessToken():boolean{
     const accessToken = sessionStorage.getItem('accessToken');
-    console.log(accessToken);
     return accessToken ? true: false;
   }
 }

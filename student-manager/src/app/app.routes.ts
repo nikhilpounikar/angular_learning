@@ -60,7 +60,7 @@ export const routes: Routes = [
       {
         path: 'sign-up',
         component: SignUpComponent,
-        canActivate: [UserAuthenticatedGuard],
+        // canActivate: [UserAuthenticatedGuard],
       },
     ],
   },
