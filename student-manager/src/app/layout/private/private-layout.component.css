@@ -1,6 +1,7 @@
 .sidebar-container{
-    padding-left: 0px;
-    overflow-y: scroll;
+       padding-left: 0px;
+        height: 80%;
+   
 }
 
 .footer{
@@ -114,4 +115,8 @@
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+  }
+
+  .border-right-100{
+    border-right:5px solid rgba(0, 0, 0, 0.5);
   }
