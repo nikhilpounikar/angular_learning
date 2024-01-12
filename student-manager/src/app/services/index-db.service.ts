@@ -100,7 +100,7 @@ export class IndexedDbService {
     // return this.dbService.getByID('courses',courseId);
   }
 
-  deleteCourse(courseId: number) {
+  deleteCourse(courseId: string) {
     return this.dbService.deleteByKey('courses',courseId);
   }
 
@@ -118,6 +118,24 @@ export class IndexedDbService {
 
           // Update the course in the database
           return this.dbService.update('courses', course);
+        });
+
+        // Use forkJoin to wait for all updates to complete
+        return forkJoin(updateObservables);
+      })
+    );
+  }
+
+  removeCourseFromAllStudents(courseId: string): Observable<Student[]> {
+    // Fetch all courses
+    return this.dbService.getAll('students').pipe(
+      switchMap((students: any[]) => {
+        const updateObservables = students.map((stduent:Student) => {
+          // Remove the student with the given courseId
+          stduent.courses = stduent.courses.filter(id => id !== courseId);
+
+          // Update the course in the database
+          return this.dbService.update('students', stduent);
         });
 
         // Use forkJoin to wait for all updates to complete

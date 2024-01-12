@@ -33,7 +33,8 @@
           <th>Name</th>
           <th>Price (INR)</th>
           <th>Stduents</th>
-          <th *ngIf="isIndividualStudentViewed">Action</th>
+          <th *ngIf="isIndividualStudentViewed">Map Student</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
@@ -45,6 +46,10 @@
           
           <td><button [routerLink]="['/private/students/view', course.courseId]" class="btn btn-dark w-50">View</button></td>
           <td *ngIf="isIndividualStudentViewed"><button (click)="addCourseToStudent(course.courseId)" class="btn btn-dark w-50">Add</button></td>
+          <td>
+            <button class="btn btn-dark w-25 mx-1 p-1">Edit</button>
+            <button (click)="deleteCourse(course.courseId)" class="btn btn-dark w-50 mx-1">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>

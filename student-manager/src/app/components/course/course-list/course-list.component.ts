@@ -61,8 +61,6 @@ export class CourseListComponent {
       (course) => !student.courses.includes(course.courseId)
     );
 
-    console.log('Student Courses', this.studentCourse);
-    console.log('Remaining Courses', this.courses);
   }
 
   ngOnInit(): void {
@@ -74,13 +72,17 @@ export class CourseListComponent {
     if (this.subscription) this.subscription.unsubscribe();
   }
 
-  // deleteCourse(studentId: number) {
-  //   this.subscription = this.dbService
-  //     .deleteStudent(studentId)
-  //     .subscribe((status) => {
-  //       if (status) this.fetchCourses();
-  //     });
-  // }
+  deleteCourse(courseId: string) {
+    this.subscription = this.dbService
+      .deleteCourse(courseId)
+      .subscribe((status) => {
+        if (status){
+
+          this.fetchCourses();
+          this.dbService.removeCourseFromAllStudents(courseId).subscribe();
+        } 
+      });
+  }
 
   addCourseToStudent(courseId: string) {
     if (courseId && this.studentId && this.student) {
