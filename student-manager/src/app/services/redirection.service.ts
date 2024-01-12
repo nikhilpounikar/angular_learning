@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SessionStorageService } from './session-storage.service';
 import { Router } from '@angular/router';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,17 @@ export class RedirectionService {
   constructor(private sessionStorage:SessionStorageService,private router:Router) { }
 
 
-   navigateToDashBoard(userId: string) {
-    if (userId) {
+   navigateToDashBoard(user: User) {
+    if (user) {
       //const accessToken =
-      this.sessionStorage.saveObjectToSessionStorage('accessToken', userId);
+      this.sessionStorage.saveObjectToSessionStorage('accessToken', user.id);
+      this.sessionStorage.saveObjectToSessionStorage('currentUser', user);
       this.router.navigate(['./private/dashboard']);
     }
+  }
+
+  navigateToLogin() {
+    this.sessionStorage.clearSessionStorage();
+    this.router.navigate(['']);
   }
 }

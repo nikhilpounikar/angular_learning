@@ -58,7 +58,7 @@ export class SignUpComponent {
       this.dbService
         .addUser(user)
         .subscribe((user: User) =>
-          this.redirectionService.navigateToDashBoard(user.id)
+          this.redirectionService.navigateToDashBoard(user)
         );
       // Add logic to send the user registration data to your backend
     } else {

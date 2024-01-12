@@ -46,6 +46,10 @@ export class IndexedDbService {
     return this.dbService.add('users', user);
   }
 
+  updateUser(user: User) {
+    return this.dbService.update('users',user);
+  }
+
   addStudent(student: any): Observable<Student> {
     return this.dbService.add('students', student);
   }

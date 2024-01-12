@@ -55,7 +55,7 @@ export class LoginComponent {
           );
 
           if (index !== -1) {
-            this.redirectionService.navigateToDashBoard(userList[index].id);
+            this.redirectionService.navigateToDashBoard(userList[index]);
           } else {
             alert('Invalid Credentails');
           }
