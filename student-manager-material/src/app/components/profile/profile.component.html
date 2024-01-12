@@ -1,0 +1,51 @@
+<div class="custom-container m-auto">
+    <main class="form-signin w-100 m-auto ">
+
+            
+            <h2 >Profile</h2> 
+
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="mt-5">
+            <div class="form-floating my-2">
+                <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="John">
+                <label for="firstName">First Name</label>
+            </div>
+
+            <div class="form-floating my-2">
+                <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Doe">
+                <label for="lastName">Last Name</label>
+            </div>
+
+            <div class="form-floating my-2">
+                <input type="text" class="form-control" id="email" formControlName="email" placeholder="abc@gmail.com"
+                    [ngClass]="{'is-invalid': userForm.get('email')?.errors && userForm.get('email')?.touched}"
+                    autocomplete="username">
+                <label for="email">Email</label>
+                <div class="invalid-feedback" *ngIf="userForm.get('email')?.hasError('emailTaken')">
+                    Email Already Exits
+                </div>
+            </div>
+            <div class="form-floating my-2">
+                <input type="password" class="form-control" id="password" formControlName="password" placeholder="1234"
+                    autocomplete="new-password">
+                <label for="password">Password</label>
+            </div>
+            <div class="form-floating my-2">
+                <input type="password" class="form-control is-invalid" id="confirmPassword"
+                    formControlName="confirmPassword"
+                    [ngClass]="{'is-invalid':userForm.get('confirmPassword')?.errors && userForm.get('confirmPassword')?.touched}"
+                    placeholder="1111" autocomplete="new-password">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="invalid-feedback" *ngIf="userForm.get('confirmPassword')?.hasError('passwordMismatch')">
+                    Password Do not Match
+                </div>
+            </div>
+            <!-- Add other form controls as needed -->
+
+
+            <button [disabled]="userForm.invalid" type="submit"
+                class="btn btn-dark w-100 mt-2">Save</button>
+
+        </form>
+
+    </main>
+</div>

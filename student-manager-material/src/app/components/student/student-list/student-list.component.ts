@@ -5,11 +5,12 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Course } from '../../../models/course';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [DatePipe, CommonModule, RouterLink],
+  imports: [DatePipe, CommonModule, RouterLink,MatDialog],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css',
 })
@@ -24,7 +25,7 @@ export class StudentListComponent {
   constructor(
     private dbService: IndexedDbService,
     private route: ActivatedRoute,
-    
+    public dialog: MatDialog
   ) {
     this.students = [];
     this.studentByCourse = [];

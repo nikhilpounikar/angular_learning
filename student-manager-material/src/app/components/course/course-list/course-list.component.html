@@ -1,0 +1,57 @@
+<div class="container my-3">
+
+  <button routerLink="/private/courses/add" class="btn btn-dark">Add Course</button>
+</div>
+<!-- student-list.component.html -->
+<div class="container custom-table my-2" *ngIf="isIndividualStudentViewed">
+  <h2>Course List for {{this.student?.name}}</h2>
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Course ID</th>
+        <th>Name</th>
+        <th>Price (INR)</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      
+      <tr *ngFor="let course of studentCourse">
+        <td>{{ course.courseId }}</td>
+        <td>{{ course.courseName }}</td>
+        <td>{{ course.price.toFixed(2) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container custom-table my-2">
+    <h2>Course List</h2>
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Course ID</th>
+          <th>Name</th>
+          <th>Price (INR)</th>
+          <th>Stduents</th>
+          <th *ngIf="isIndividualStudentViewed">Map Student</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        
+        <tr *ngFor="let course of courses">
+          <td>{{ course.courseId }}</td>
+          <td>{{ course.courseName }}</td>
+          <td>{{ course.price.toFixed(2) }}</td>
+          
+          <td><button [routerLink]="['/private/students/view', course.courseId]" class="btn btn-dark w-50">View</button></td>
+          <td *ngIf="isIndividualStudentViewed"><button (click)="addCourseToStudent(course.courseId)" class="btn btn-dark w-50">Add</button></td>
+          <td>
+            <button [routerLink]="['/private/courses/update', course.courseId]" class="btn btn-dark w-25 mx-1 p-1">Edit</button>
+            <button (click)="deleteCourse(course.courseId)" class="btn btn-dark w-50 mx-1">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+  

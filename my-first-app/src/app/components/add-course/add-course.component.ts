@@ -16,13 +16,7 @@ export class AddCourseComponent {
   courseId:string
 
   constructor(private store: Store<AppState>) {
-    // this.newCourse = {
-    //   id: this.generateCourseID(),
-    //   name: '',
-    //   price: 999,
-    //   currency: 'INR',
-    //   description: '',
-    // };
+
     this.courseId = this.generateCourseID();
   }
 

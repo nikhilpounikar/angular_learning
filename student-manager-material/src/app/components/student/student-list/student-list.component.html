@@ -26,8 +26,8 @@
         <td>{{ student.email }}</td>
         <td>{{ student.dateOfBirth | date:'shortDate' }}</td>
         <td>{{ student.gender }}</td>
-        <!-- <td><button [routerLink]="['/private/courses/view', student.studentId]" class="btn btn-dark w-50">View</button></td> -->
-        <td><button mat-raised-button class="btn btn-dark" (click)="openDialog()">Pick one</button></td>
+        <td><button [routerLink]="['/private/courses/view', student.studentId]" class="btn btn-dark w-50">View</button></td>
+        <td><button mat-raised-button class="btn btn-dark w-50" (click)="openDialog()">View</button></td>
       </tr>
     </tbody>
   </table>
