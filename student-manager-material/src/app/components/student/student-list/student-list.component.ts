@@ -5,12 +5,14 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Course } from '../../../models/course';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import { AddStudentComponent } from '../add-student/add-student.component';
+import { EditStudentComponent } from '../edit-student/edit-student.component';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [DatePipe, CommonModule, RouterLink,MatDialog],
+  imports: [DatePipe, CommonModule, RouterLink],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css',
 })
@@ -116,7 +118,22 @@ export class StudentListComponent {
     if (student) this.dbService.updateStudent(student).subscribe(stu=>console.log(stu));
   }
 
-  openDialog(){
+  openDialog(code: any, title: any,component:any) {
+    var _popup = this.dialog.open(component, {
+      width: '40%',
+      
+      data: {
+        title: title,
+        studentId: code
+      }
+    });
+    _popup.afterClosed().subscribe(item => {
+      // console.log(item)
+      this.fetchStudents();
+    })
+  }
 
+  editStudent(studentId:string) {
+    this.openDialog(studentId, 'Edit Customer',EditStudentComponent);
   }
 }
