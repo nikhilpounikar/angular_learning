@@ -39,7 +39,7 @@ export class EditStudentComponent {
   ) {
     this.isUpdating = false;
 
-    this.studentId = this.route.snapshot.params['id'];
+    this.studentId = '';
 
     this.addStudentForm = this.prepareFormData();
   }
@@ -112,7 +112,7 @@ export class EditStudentComponent {
     return this.addStudentForm.get('gender');
   }
 
-  addStudent() {
+  updateStudent() {
     if (this.addStudentForm.valid) {
       if (this.isUpdating && this.addStudentForm.value) {
         

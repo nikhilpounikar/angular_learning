@@ -1,7 +1,7 @@
 <main class="student-form-container-edit">
     
     <div mat-dialog-content>
-    <form [formGroup]="addStudentForm" (ngSubmit)="addStudent()">
+    <form [formGroup]="addStudentForm">
         <h1 mat-dialog-title>{{inputData.title}}</h1>
       <div class="form-floating my-2">
         <input type="text" class="form-control" formControlName="name" placeholder="Enter Full Name"
@@ -47,7 +47,7 @@
   
       <div>
 
-          <button mat-raised-button [disabled]="addStudentForm.invalid" type="submit" class="btn btn-dark w-25 mx-2">Save</button>
+          <button mat-raised-button [disabled]="addStudentForm.invalid" (click)="updateStudent()" type="submit" class="btn btn-dark w-25 mx-2">Save</button>
           <button (click)="closepopup()" mat-raised-button color="warn" class="btn btn-danger w-25 mx-2">Close</button>
       </div>
       <!-- Add other form controls as needed -->
