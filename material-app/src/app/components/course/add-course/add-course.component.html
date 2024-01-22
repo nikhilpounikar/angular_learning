@@ -1,0 +1,18 @@
+<main class="form-signin m-auto mt-5 student-form-container">
+    <h2>Add Course</h2>
+    <form [formGroup]="addCourseForm" (ngSubmit)="addCourse()">
+      <div class="form-floating my-2">
+        <input type="text" class="form-control" formControlName="courseName" placeholder="Enter Course Name"
+          [ngClass]="{'is-invalid': courseName?.errors && courseName?.touched}">
+        <label for="courseName">Course</label>
+      </div>
+  
+      <div class="form-floating my-2">
+        <input type="number" class="form-control" formControlName="price" placeholder="99"
+          [ngClass]="{'is-invalid': price?.errors && price?.touched}">
+        <label for="price">Price</label>
+      </div>
+      <!-- Add other form controls as needed -->
+      <button [disabled]="addCourseForm.invalid" type="submit" class="btn btn-dark w-100">Add</button>
+    </form>
+  </main>
